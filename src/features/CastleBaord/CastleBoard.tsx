@@ -1,22 +1,29 @@
-import { Suspense } from "react";
+import { useSyncExternalStore } from "react";
 import css from "./castleBoard.module.css";
-import { Await } from "@tanstack/react-router";
+import { state$ } from "@/shared/castlesBus";
+import type { Faction } from "@/shared/castlesBus";
+import { castles } from "@/shared/castles";
+
+function useFaction(): Faction {
+  return useSyncExternalStore(
+    (cb) => {
+      const sub = state$.subscribe(cb);
+      return () => sub.unsubscribe();
+    },
+    () => state$.getValue().down.faction,
+    () => state$.getValue().down.faction,
+  );
+}
 
 const CastleBoard = () => {
-  //   const { castle, castleUUID } = ???;
-  //   const { castleID } = ???;
+  const faction = useFaction();
+  const castleData = castles[faction];
 
   return (
     <section className={css.main}>
-      <div>
-        <Suspense
-          fallback={<div className={css.loader}>Loading Castle Data...</div>}
-        >
-          <Await promise={castle}>
-            {(resolvedCastle) => <div>{castleID}</div>}
-          </Await>
-        </Suspense>
-      </div>
+      {Object.entries(castleData).map(([id, building]) => (
+        <div key={id}>{building.name}</div>
+      ))}
     </section>
   );
 };
