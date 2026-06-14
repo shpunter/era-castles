@@ -1,0 +1,47 @@
+.resources {
+  position: absolute;
+  right: -30px;
+  bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    border-color 0.12s ease-in-out,
+    filter 0.12s ease-in-out;
+}
+
+.option:hover {
+  border-color: var(--color-yellow-border);
+  filter: brightness(1.15);
+}
+
+.active {
+  border-color: var(--color-yellow-border);
+}
+
+.inactive {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.inactive:hover {
+  filter: grayscale(1) brightness(1.15);
+  opacity: 1;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+}

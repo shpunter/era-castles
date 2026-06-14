@@ -1,29 +1,29 @@
-import { useSyncExternalStore } from "react";
+import { Suspense } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import css from "./castleBoard.module.css";
-import { state$ } from "@/shared/castlesBus";
 import type { Faction } from "@/shared/castlesBus";
-import { castles } from "@/shared/castles";
+import { getCastleData } from "../../server/castleBoard.rpc";
+import { useFaction } from "./useGetFaction";
+import CastleGrid from "./castleGrid/CastleGrid";
 
-function useFaction(): Faction {
-  return useSyncExternalStore(
-    (cb) => {
-      const sub = state$.subscribe(cb);
-      return () => sub.unsubscribe();
-    },
-    () => state$.getValue().down.faction,
-    () => state$.getValue().down.faction,
-  );
-}
+const CastleBoardInner = ({ faction }: { faction: Faction }) => {
+  const { data: castle } = useSuspenseQuery({
+    queryKey: ["castleData", faction],
+    queryFn: () => getCastleData({ data: faction }),
+  });
+  return <CastleGrid castle={castle} castleID="hive" castleUUID="uuid" />;
+};
 
 const CastleBoard = () => {
   const faction = useFaction();
-  const castleData = castles[faction];
 
   return (
     <section className={css.main}>
-      {Object.entries(castleData).map(([id, building]) => (
-        <div key={id}>{building.name}</div>
-      ))}
+      <Suspense
+        fallback={<div className={css.loader}>Loading Castle Data...</div>}
+      >
+        <CastleBoardInner faction={faction} />
+      </Suspense>
     </section>
   );
 };

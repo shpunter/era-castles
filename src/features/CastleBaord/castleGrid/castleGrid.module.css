@@ -1,0 +1,7 @@
+.castle {
+  display: grid;
+  grid-template-columns: repeat(9, 130px);
+  grid-template-rows: repeat(5, 108px);
+  justify-items: center;
+  gap: 20px;
+}
