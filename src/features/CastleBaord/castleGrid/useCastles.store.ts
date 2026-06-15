@@ -130,6 +130,15 @@ export const useCastlesStore = create<Store & Action>((set) => {
         };
       });
     },
+
+    setActiveTab: (castleUUID) => {
+      set((state) => {
+        return {
+          ...state,
+          currCastleUUID: castleUUID,
+        };
+      });
+    },
   };
 });
 
@@ -164,9 +173,11 @@ type Store = {
 };
 
 type Action = {
-  addBuilding: (buildingID: BuildingID) => void;
   removeBuildings: (buildingIDs: BuildingID[]) => void;
   setInit: (faction: Faction, day: number, castle: Castle, preBuilds: PreBuilds) => void;
+  setActiveTab: (castleUUID: string) => void;
+  
+  addBuilding: (buildingID: BuildingID) => void;
   addCastle: (
     castleUUID: string,
     castleID: CastleID,

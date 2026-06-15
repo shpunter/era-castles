@@ -7,15 +7,15 @@ import { trace } from "../utils";
 import css from "./building.module.css";
 import BuildingActions from "./buildingActions/BuildingActions";
 import BuildingLabel from "./buildingLabel/BuildingLabel";
-import { useBuildingStatus } from "./useBuildingStatus";
+import { getBuildingStatus, type BuildingIndex } from "./useBuildingStatus";
 
-const Building = ({ building, castle }: BuildingProps) => {
+const Building = ({ building, castle, index }: BuildingProps) => {
   const setMarked = useMarkedStore((state) => state.setMarked);
   const addBuilding = useCastlesStore((state) => state.addBuilding);
   const removeBuildings = useCastlesStore((state) => state.removeBuildings);
 
   const { isBuiltByCurDay, isBuiltThisDay, isInTheHistory, isAvailable } =
-    useBuildingStatus(building.id);
+    getBuildingStatus(building, index);
 
   const isMarked = useMarkedStore((state) => {
     return state.marked.includes(building.id);
@@ -93,4 +93,5 @@ export default Building;
 type BuildingProps = {
   building: { uuid: string } & CastleBuilding;
   castle: Castle;
+  index: BuildingIndex;
 };

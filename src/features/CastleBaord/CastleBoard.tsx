@@ -1,18 +1,24 @@
 import { Suspense, useEffect } from "react";
 import css from "./castleBoard.module.css";
 import type { Faction } from "@/shared/castlesBus";
-import { useGetDown } from "./useGetFaction";
+import { useGetDown } from "./useGetDown";
 import CastleGrid from "./castleGrid/CastleGrid";
 import { useFetchCastle } from "./useFetchCastle";
 import { useCastlesStore } from "./castleGrid/useCastles.store";
+import { initSendBack } from "#/shared/sendBack";
+import CastleTabs from "./tabs/Tabs";
 
 const CastleBoardInner = ({ faction, day }: CastleBoardInnerProps) => {
-  const { data: { castle, preBuilds } } = useFetchCastle(faction);
+  const {
+    data: { castle, preBuilds },
+  } = useFetchCastle(faction);
   const setInit = useCastlesStore((state) => state.setInit);
 
   useEffect(() => {
     setInit(faction, day, castle, preBuilds);
   }, [setInit, day, faction, castle, preBuilds]);
+
+  useEffect(() => initSendBack(), []);
 
   return <CastleGrid castle={castle} />;
 };
@@ -22,6 +28,10 @@ const CastleBoard = () => {
 
   return (
     <section className={css.main}>
+      <div className={css.tabsWrapper}>
+        <CastleTabs />
+        {/* <Add /> */}
+      </div>
       <Suspense
         fallback={<div className={css.loader}>Loading Castle Data...</div>}
       >

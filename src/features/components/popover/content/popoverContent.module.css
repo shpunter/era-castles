@@ -1,0 +1,23 @@
+.content {
+  margin: 0;
+  /* clear the UA popover inset:0, then anchor below the trigger, left-aligned */
+  inset: auto;
+  position: absolute;
+  top: anchor(bottom);
+  right: anchor(right);
+  margin-top: 6px;
+
+  /* Deliberately no `display` here: an author `display` overrides the UA
+   * [popover]:not(:popover-open){display:none} rule (author origin wins over
+   * UA), which would leave the popover permanently shown. Lay out content via
+   * a wrapper inside, not on this element. */
+  padding: 4px;
+  background-color: var(--dark-blue-30);
+  border: 1px solid var(--black-40);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 12px var(--shadow-50),
+    0 0 6px var(--highlight-25);
+
+  position-try-fallbacks: flip-block;
+}

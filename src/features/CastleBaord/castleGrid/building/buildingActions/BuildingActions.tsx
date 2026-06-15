@@ -35,10 +35,10 @@ const BuildingActions = ({ buildingID, isAvailable }: BuildingActionsProps) => {
         </div>
       )}
 
-      {buildingID === "id11" && (
+      {buildingID === "id11" && canBeRemoved && (
         <CastleMine value={500} buildingID={buildingID} />
       )}
-      {buildingID === "id21" && (
+      {buildingID === "id21" && canBeRemoved &&(
         <CastleMine value={1000} buildingID={buildingID} />
       )}
     </>

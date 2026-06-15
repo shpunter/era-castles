@@ -1,0 +1,15 @@
+.tabs {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+
+  /* one connected panel rather than separate buttons */
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark-blue-40),
+    var(--dark-blue-20)
+  );
+}

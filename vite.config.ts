@@ -12,8 +12,8 @@ export default defineConfig(({ mode }) => {
   const publicUrl = process.env.PUBLIC_URL ?? "https://castles.eraplanner.com/";
 
   return {
-    server: { port: 3001, cors: true },
-    preview: { port: 3001, cors: true },
+    server: { port: 8089, cors: true },
+    preview: { port: 8089, cors: true },
     base: isDev ? "/" : publicUrl,
     resolve: { tsconfigPaths: true },
     optimizeDeps: { exclude: ["rxjs"] },

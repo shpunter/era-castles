@@ -2,8 +2,11 @@ import { useMemo } from "react";
 import Building from "./building/Building";
 import css from "./castleGrid.module.css";
 import type { Castle, CastleBuilding } from "../useFetchCastle";
+import { useCastleIndex } from "./building/useBuildingStatus";
 
 const CastleGrid = ({ castle }: CastleGridProps) => {
+  const index = useCastleIndex();
+
   const grid = useMemo(() => {
     const array = Array.from({ length: 9 * 5 }, () => ({
       uuid: crypto.randomUUID(),
@@ -30,6 +33,7 @@ const CastleGrid = ({ castle }: CastleGridProps) => {
             key={building.uuid}
             building={building}
             castle={castle}
+            index={index}
           />
         ) : (
           <div key={building.uuid} />
