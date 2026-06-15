@@ -1,5 +1,5 @@
-import type { BuildingID, CastleID } from "#/routes/faction/$id";
-import { castles } from "#/routes/faction/castles.config";
+import type { Castle } from "../useFetchCastle";
+import type { BuildingID } from "./useCastles.store";
 
 type Direction = "prev" | "next";
 
@@ -9,7 +9,7 @@ type BuildingNode = {
 };
 
 const fn = (
-  castle: Partial<Record<BuildingID, BuildingNode>>,
+  castle: Record<string, BuildingNode>,
   buildingID: BuildingID,
   IDs: Set<BuildingID>,
   direction: Direction,
@@ -26,13 +26,13 @@ const fn = (
 };
 
 export const trace = (
-  castleID: CastleID,
+  castle: Castle,
   buildingID: BuildingID,
   direction: Direction,
 ) => {
   const IDs = new Set<BuildingID>();
 
-  fn(castles[castleID], buildingID, IDs, direction);
+  fn(castle, buildingID, IDs, direction);
 
   return Array.from(IDs);
 };

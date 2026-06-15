@@ -1,17 +1,18 @@
-import type { CastleID, TBuilding } from "#/routes/faction/$id";
 import { classnames } from "#/shared/classnames";
+import type { Castle, CastleBuilding } from "../../useFetchCastle";
+import { useCastlesStore } from "../useCastles.store";
+import { useMarkedStore } from "../useMarked.store";
+import { trace } from "../utils";
+
 import css from "./building.module.css";
-import { trace } from "./utils";
-import { useHistoryStore } from "#/features/history/history.store";
-import { useBuildingStatus } from "./useBuildingStatus";
 import BuildingActions from "./buildingActions/BuildingActions";
 import BuildingLabel from "./buildingLabel/BuildingLabel";
-import { useMarkedStore } from "#/features/castles/useMarked.store";
+import { useBuildingStatus } from "./useBuildingStatus";
 
-const Building = ({ building, castleID }: BuildingProps) => {
+const Building = ({ building, castle }: BuildingProps) => {
   const setMarked = useMarkedStore((state) => state.setMarked);
-  const addBuilding = useHistoryStore((state) => state.addBuilding);
-  const removeBuildings = useHistoryStore((state) => state.removeBuildings);
+  const addBuilding = useCastlesStore((state) => state.addBuilding);
+  const removeBuildings = useCastlesStore((state) => state.removeBuildings);
 
   const { isBuiltByCurDay, isBuiltThisDay, isInTheHistory, isAvailable } =
     useBuildingStatus(building.id);
@@ -25,7 +26,7 @@ const Building = ({ building, castleID }: BuildingProps) => {
   });
 
   const onMouseEnter = () => {
-    const buildingIDs = trace(castleID, building.id, "prev");
+    const buildingIDs = trace(castle, building.id, "prev");
 
     setMarked(buildingIDs);
   };
@@ -38,7 +39,7 @@ const Building = ({ building, castleID }: BuildingProps) => {
     if (!isAvailable || isBuiltByCurDay) return;
 
     if (isInTheHistory) {
-      removeBuildings(trace(castleID, building.id, "next"));
+      removeBuildings(trace(castle, building.id, "next"));
     }
 
     addBuilding(building.id);
@@ -67,13 +68,12 @@ const Building = ({ building, castleID }: BuildingProps) => {
       onClick={onClick}
     >
       <img
-        key={`${castleID}-${building.id}`}
-        src={`/img/factions/buildings/${castleID}/${building.id}.webp`}
+        key={building.id}
+        src={`/img/factions/buildings/hive/${building.id}.webp`}
         alt={building.name}
         className={css.image}
       />
       <BuildingActions
-        castleID={castleID}
         buildingID={building.id}
         isAvailable={isAvailable && !isBuiltThisDay && !isBuiltByCurDay}
       />
@@ -91,6 +91,6 @@ const Building = ({ building, castleID }: BuildingProps) => {
 export default Building;
 
 type BuildingProps = {
-  building: { uuid: string } & TBuilding;
-  castleID: CastleID;
+  building: { uuid: string } & CastleBuilding;
+  castle: Castle;
 };

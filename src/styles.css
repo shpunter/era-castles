@@ -1,1 +1,112 @@
-@import "tailwindcss";
+*:not(img) {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --black-10: oklch(0.1 0 0);
+    --black-18: oklch(0.18 0 0);
+    --black-20: oklch(0.2 0 0);
+    --black-25: oklch(0.25 0 0);
+    --black-30: oklch(0.3 0 0);
+    --black-40: oklch(0.4 0 0);
+    --black-50: oklch(0.5 0 0);
+    --black-60: oklch(0.6 0 0);
+    --black-70: oklch(0.7 0 0);
+    --black-80: oklch(0.8 0 0);
+    --black-90: oklch(0.9 0 0);
+  
+    --text-dim: oklch(0.62 0.01 243);
+  
+    --color-green: oklch(0.48 0.14 133);
+    --color-green-light: oklch(0.65 0.1 133);
+    --color-green-border: oklch(0.85 0.1 133);
+  
+    --color-red: oklch(0.48 0.14 25);
+    --color-red-light: oklch(0.65 0.1 25);
+    --color-red-border: oklch(0.85 0.1 25);
+  
+    --green-20: oklch(0.2 0.14 133);
+    --green-30: oklch(0.3 0.14 133);
+    --green-40: oklch(0.4 0.14 133);
+    --green-50: oklch(0.5 0.14 133);
+    --green-60: oklch(0.6 0.14 133);
+    --green-70: oklch(0.7 0.14 133);
+    --green-80: oklch(0.8 0.14 133);
+    --green-90: oklch(0.9 0.14 133);
+    --green-shadow: oklch(0.9 0.14 133 / 0.5);
+  
+    --color-yellow: oklch(0.48 0.1 108);
+    --color-yellow-light: oklch(0.65 0.1 108);
+    --color-yellow-border: oklch(0.85 0.1 108);
+    --color-yellow-shadow: oklch(0.85 0.1 108 / 0.5);
+
+    --yellow-40: oklch(0.4 0.1 108);
+    --yellow-50: oklch(0.5 0.1 108);
+    --yellow-60: oklch(0.6 0.1 108);
+    --yellow-70: oklch(0.7 0.1 108);
+    --yellow-80: oklch(0.8 0.1 108);
+    --yellow-90: oklch(0.9 0.1 108);
+  
+    --red-40: oklch(0.4 0.1 30);
+    --red-50: oklch(0.5 0.1 30);
+    --red-60: oklch(0.6 0.1 30);
+    --red-70: oklch(0.7 0.1 30);
+    --red-80: oklch(0.8 0.1 30);
+    --red-90: oklch(0.9 0.1 30);
+    --red-shadow: oklch(0.9 0.1 30 / 0.5);
+  
+    --iron-20: oklch(0.2 0.05 20);
+    --iron-30: oklch(0.3 0.05 20);
+    --iron-40: oklch(0.4 0.05 20);
+    --iron-50: oklch(0.5 0.05 20);
+    --iron-60: oklch(0.6 0.05 20);
+
+    --dark-blue-20: oklch(0.2 0.04 257);
+    --dark-blue-30: oklch(0.3 0.04 257);
+    --dark-blue-40: oklch(0.4 0.04 257); 
+    --dark-blue-50: oklch(0.5 0.04 257);
+    --dark-blue-60: oklch(0.6 0.04 257);
+
+
+    --background: oklch(0.24 0.03 258);
+
+    --item: oklch(0.24 0.04 264);
+    --border: oklch(0.37 0.03 256);
+
+    --text-main: oklch(0.96 0.02 260 / 0.7);
+  
+    --color-error: oklch(0.44 0.18 29 / 0.4);
+    --color-accent: oklch(0.96 0.21 111 / 0.576);
+
+    --highlight-12: oklch(1 0 0 / 0.12);
+    --highlight-15: oklch(1 0 0 / 0.15);
+    --highlight-18: oklch(1 0 0 / 0.18);
+    --highlight-20: oklch(1 0 0 / 0.2);
+    --highlight-25: oklch(1 0 0 / 0.25);
+
+    --shadow-40: oklch(0 0 0 / 0.4);
+    --shadow-45: oklch(0 0 0 / 0.45);
+    --shadow-50: oklch(0 0 0 / 0.5);
+    --shadow-55: oklch(0 0 0 / 0.55);
+    --shadow-60: oklch(0 0 0 / 0.6);
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    /* font-family:
+      JetBrains Mono,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace,
+      Courier New; */
+      font-family: system-ui, sans-serif;
+    font-size: 12px;
+
+    color: var(--text-main);
+    background-color: var(--background);
+  }
+
+ 

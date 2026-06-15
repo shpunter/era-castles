@@ -1,25 +1,25 @@
-import { useHistoryStore } from "#/features/history/history.store";
-import type { BuildingID, CastleID } from "#/routes/faction/$id";
-import { trace } from "../utils";
+import { useCastlesStore, type BuildingID } from "../../useCastles.store";
+import { trace } from "../../utils";
 import css from "./buildingActions.module.css";
 import CastleMine from "./castleMine/CastleMine";
 
-const BuildingActions = ({
-  castleID,
-  buildingID,
-  isAvailable,
-}: BuildingActionsProps) => {
-  const removeBuildings = useHistoryStore((state) => state.removeBuildings);
+const BuildingActions = ({ buildingID, isAvailable }: BuildingActionsProps) => {
+  const removeBuildings = useCastlesStore((state) => state.removeBuildings);
+  const castle = useCastlesStore(
+    (state) => state.castles[state.currCastleUUID]?.castle,
+  );
 
-  const canBeRemoved = useHistoryStore((state) => {
+  const canBeRemoved = useCastlesStore((state) => {
     const currBuiltHistory = state.history?.[state.currCastleUUID]?.built ?? [];
 
     return currBuiltHistory.includes(buildingID);
   });
 
   const onRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!castle) return;
+
     event.stopPropagation();
-    removeBuildings(trace(castleID, buildingID, "next"));
+    removeBuildings(trace(castle, buildingID, "next"));
   };
 
   return (
@@ -48,7 +48,6 @@ const BuildingActions = ({
 export default BuildingActions;
 
 type BuildingActionsProps = {
-  castleID: CastleID;
   buildingID: BuildingID;
   isAvailable: boolean;
 };

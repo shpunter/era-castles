@@ -1,4 +1,4 @@
-import { castles } from "#/server/castles";
+import { castles, initCastlePreBuilds } from "#/server/castles";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
@@ -13,4 +13,7 @@ const factionSchema = z.enum([
 
 export const getCastleData = createServerFn({ method: "GET" })
   .validator(factionSchema)
-  .handler(({ data: faction }) => castles[faction]);
+  .handler(({ data: faction }) => ({
+    castle: castles[faction],
+    preBuilds: initCastlePreBuilds[faction],
+  }));

@@ -1,5 +1,4 @@
-import type { TBuilding } from "#/routes/faction/$id";
-
+import type { CastleBuilding } from "#/features/CastleBaord/useFetchCastle";
 import { classnames } from "#/shared/classnames";
 import css from "./buildingLabel.module.css";
 
@@ -23,7 +22,7 @@ const BuildingLabel = ({
 export default BuildingLabel;
 
 type BuildingLabelProps = {
-  name: TBuilding["name"];
+  name: CastleBuilding["name"];
   isMarked: boolean;
   isBuilt: boolean;
   isAvailable: boolean;

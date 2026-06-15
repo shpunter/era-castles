@@ -1,5 +1,5 @@
 import { classnames } from "#/shared/classnames";
-import { useHistoryStore } from "#/features/history/history.store";
+import { useCastlesStore } from "../../../useCastles.store";
 import css from "./castleMine.module.css";
 
 const RESOURCES = [
@@ -9,9 +9,9 @@ const RESOURCES = [
 ] as const;
 
 const CastleMine = ({ value, buildingID }: CastleMineProps) => {
-  const addCastleMines = useHistoryStore((state) => state.addCastleMines);
+  const addCastleMines = useCastlesStore((state) => state.addCastleMines);
 
-  const activeRes = useHistoryStore(
+  const activeRes = useCastlesStore(
     (state) => state.castleMines[state.currCastleUUID]?.[buildingID]?.resource,
   );
 

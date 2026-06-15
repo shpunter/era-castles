@@ -1,15 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import Building from "./building/Building";
 import css from "./castleGrid.module.css";
-// import { type CastleID } from "./useCastles.store";
+import type { Castle, CastleBuilding } from "../useFetchCastle";
 
-const CastleGrid = ({ castle, castleID, castleUUID }: CastleGridProps) => {
+const CastleGrid = ({ castle }: CastleGridProps) => {
   const grid = useMemo(() => {
     const array = Array.from({ length: 9 * 5 }, () => ({
       uuid: crypto.randomUUID(),
-    })) as { uuid: string }[];
-    
-    Object.values(castle?.buildings ?? {}).forEach((building) => {
+    })) as Array<{ uuid: string } | ({ uuid: string } & CastleBuilding)>;
+
+    (Object.values(castle ?? {}) as CastleBuilding[]).forEach((building) => {
       if (!building) return;
 
       const [y, x] = building.pos;
@@ -29,7 +29,7 @@ const CastleGrid = ({ castle, castleID, castleUUID }: CastleGridProps) => {
           <Building
             key={building.uuid}
             building={building}
-            castleID={castle.castleID}
+            castle={castle}
           />
         ) : (
           <div key={building.uuid} />
@@ -42,7 +42,5 @@ const CastleGrid = ({ castle, castleID, castleUUID }: CastleGridProps) => {
 export default CastleGrid;
 
 type CastleGridProps = {
-  castle: ;
-  castleID: "hive";
-  castleUUID: string;
+  castle: Castle;
 };
