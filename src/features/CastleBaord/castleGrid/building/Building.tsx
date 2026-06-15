@@ -1,5 +1,6 @@
 import { classnames } from "#/shared/classnames";
 import type { Castle, CastleBuilding } from "../../useFetchCastle";
+import type { Faction } from "#/shared/castlesBus";
 import { useCastlesStore } from "../useCastles.store";
 import { useMarkedStore } from "../useMarked.store";
 import { trace } from "../utils";
@@ -9,7 +10,7 @@ import BuildingActions from "./buildingActions/BuildingActions";
 import BuildingLabel from "./buildingLabel/BuildingLabel";
 import { getBuildingStatus, type BuildingIndex } from "./useBuildingStatus";
 
-const Building = ({ building, castle, index }: BuildingProps) => {
+const Building = ({ building, castle, faction, index }: BuildingProps) => {
   const setMarked = useMarkedStore((state) => state.setMarked);
   const addBuilding = useCastlesStore((state) => state.addBuilding);
   const removeBuildings = useCastlesStore((state) => state.removeBuildings);
@@ -69,7 +70,7 @@ const Building = ({ building, castle, index }: BuildingProps) => {
     >
       <img
         key={building.id}
-        src={`/img/factions/buildings/hive/${building.id}.webp`}
+        src={`/img/factions/buildings/${faction}/${building.id}.webp`}
         alt={building.name}
         className={css.image}
       />
@@ -93,5 +94,6 @@ export default Building;
 type BuildingProps = {
   building: { uuid: string } & CastleBuilding;
   castle: Castle;
+  faction: Faction;
   index: BuildingIndex;
 };

@@ -2,11 +2,13 @@ import { getCastleData } from "#/server/castleBoard.rpc";
 import type { Faction } from "#/shared/castlesBus";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+export const castleQueryOptions = (faction: Faction) => ({
+  queryKey: ["castleData", faction] as const,
+  queryFn: () => getCastleData({ data: faction }),
+});
+
 export const useFetchCastle = (faction: Faction) => {
-  return useSuspenseQuery({
-    queryKey: ["castleData", faction],
-    queryFn: () => getCastleData({ data: faction }),
-  });
+  return useSuspenseQuery(castleQueryOptions(faction));
 };
 
 type RawResponse = Awaited<ReturnType<typeof getCastleData>>;

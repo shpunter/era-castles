@@ -1,4 +1,8 @@
-import { castles, initCastlePreBuilds } from "#/server/castles";
+import {
+  castles,
+  initCastlePreBuilds,
+  secondaryCastlePreBuilds,
+} from "#/server/castles";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
@@ -16,4 +20,5 @@ export const getCastleData = createServerFn({ method: "GET" })
   .handler(({ data: faction }) => ({
     castle: castles[faction],
     preBuilds: initCastlePreBuilds[faction],
+    secondaryPreBuilds: secondaryCastlePreBuilds[faction],
   }));

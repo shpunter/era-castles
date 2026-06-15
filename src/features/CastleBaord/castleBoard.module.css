@@ -1,5 +1,11 @@
 .main {
+  grid-template-areas: "main";
+  display: grid;
 }
 
-.loader {
+.tabsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 10px 0;
 }

@@ -76,7 +76,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
       });
     },
 
-    addCastle: (castleUUID, castleID, castle, preBuilds) => {
+    addCastle: (castleUUID, faction, castle, preBuilds) => {
       set((state) => {
         // Idempotent registration. The castles tab remounts CastleGrid on every
         // visit (it re-runs this with the route loader's stable castleUUID), so
@@ -99,7 +99,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
             [castleUUID]: {
               castle,
               preBuilds,
-              castleID,
+              faction,
               foundDay: state.day,
             },
           },
@@ -123,7 +123,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
             [state.currCastleUUID]: {
               castle,
               preBuilds,
-              castleID: faction,
+              faction: faction,
               foundDay: 0,
             },
           },
@@ -150,7 +150,7 @@ type Store = {
       | {
           castle: Castle;
           preBuilds: readonly BuildingID[];
-          castleID: CastleID;
+          faction: Faction;
           /** day the castle was added (first castle = 0) */
           foundDay: number;
         }
@@ -180,7 +180,7 @@ type Action = {
   addBuilding: (buildingID: BuildingID) => void;
   addCastle: (
     castleUUID: string,
-    castleID: CastleID,
+    faction: Faction,
     castle: Castle,
     preBuilds: readonly BuildingID[],
   ) => void;
@@ -191,11 +191,4 @@ type Action = {
   ) => void;
 };
 
-export type CastleID =
-  | "hive"
-  | "schism"
-  | "temple"
-  | "dungeon"
-  | "grove"
-  | "necropolis";
 export type BuildingID = CastleBuilding["id"];

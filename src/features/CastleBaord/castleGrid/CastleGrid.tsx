@@ -2,9 +2,10 @@ import { useMemo } from "react";
 import Building from "./building/Building";
 import css from "./castleGrid.module.css";
 import type { Castle, CastleBuilding } from "../useFetchCastle";
+import type { Faction } from "#/shared/castlesBus";
 import { useCastleIndex } from "./building/useBuildingStatus";
 
-const CastleGrid = ({ castle }: CastleGridProps) => {
+const CastleGrid = ({ castle, faction }: CastleGridProps) => {
   const index = useCastleIndex();
 
   const grid = useMemo(() => {
@@ -33,6 +34,7 @@ const CastleGrid = ({ castle }: CastleGridProps) => {
             key={building.uuid}
             building={building}
             castle={castle}
+            faction={faction}
             index={index}
           />
         ) : (
@@ -47,4 +49,5 @@ export default CastleGrid;
 
 type CastleGridProps = {
   castle: Castle;
+  faction: Faction;
 };

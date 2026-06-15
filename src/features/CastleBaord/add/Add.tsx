@@ -4,19 +4,22 @@ import { useCastlesStore } from "../castleGrid/useCastles.store";
 import type { Faction } from "#/shared/castlesBus";
 import Popover from "#/features/components/popover/Popover";
 import Button from "#/features/components/tabs/button/Button";
+import { useQueryClient } from "@tanstack/react-query";
+import { castleQueryOptions } from "../useFetchCastle";
 
 const castleIDs = ["hive", "dungeon", "grove", "necropolis", "schism", "temple"] as Faction[];
 
 const Add = () => {
   const addCastle = useCastlesStore((state) => state.addCastle);
+  const queryClient = useQueryClient();
 
-  const onAdd = (castleID: Faction) =>
-    addCastle(
-      crypto.randomUUID(),
-      castleID,
-      castles[castleID],
-      secondaryCastlePreBuilds[castleID],
+  const onAdd = async (faction: Faction) => {
+    const { castle, secondaryPreBuilds } = await queryClient.fetchQuery(
+      castleQueryOptions(faction),
     );
+
+    addCastle(crypto.randomUUID(), faction, castle, secondaryPreBuilds);
+  };
 
   return (
     <Popover>
@@ -27,23 +30,23 @@ const Add = () => {
       <Popover.Content>
         {({ close }) => (
           <div className={css.options}>
-            {castleIDs.map((castleID) => {
+            {castleIDs.map((faction) => {
               const onClick = () => {
                 close();
-                onAdd(castleID);
+                onAdd(faction);
               };
 
               return (
                 <button
-                  key={castleID}
+                  key={faction}
                   type="button"
                   className={css.option}
-                  data-testid={`add-${castleID}`}
+                  data-testid={`add-${faction}`}
                   onClick={onClick}
                 >
                   <img
-                    src={`/img/factions/logo/${castleID}.webp`}
-                    alt={castleID}
+                    src={`/img/factions/logo/${faction}.webp`}
+                    alt={faction}
                     className={css.icon}
                   />
                 </button>

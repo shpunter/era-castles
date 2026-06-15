@@ -12,7 +12,7 @@ const CastleTabs = () => {
   return (
     <Tabs value={currCastleUUID} onChange={setActiveTab}>
       {Object.entries(castles).map(([uuid, castle]) => {
-        if (!castle?.castleID) return null;
+        if (!castle?.faction) return null;
 
         const isDisabled = history[uuid]?.disabled[historyIDX] ?? false;
         if (isDisabled) return null;
@@ -23,8 +23,8 @@ const CastleTabs = () => {
           <Tabs.Tab key={uuid} value={uuid} indicator={hasChange}>
             <div className={css.item}>
               <img
-                src={`/img/factions/logo/${castle.castleID}.webp`}
-                alt={castle.castleID}
+                src={`/img/factions/logo/${castle.faction}.webp`}
+                alt={castle.faction}
                 className={css.logo}
               />
             </div>
