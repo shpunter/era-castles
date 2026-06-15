@@ -1,18 +1,28 @@
-import { getCastleData } from "#/server/castleBoard.rpc";
 import type { Faction } from "#/shared/castlesBus";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {
+  castles,
+  initCastlePreBuilds,
+  secondaryCastlePreBuilds,
+} from "#/shared/castles";
 
-export const castleQueryOptions = (faction: Faction) => ({
-  queryKey: ["castleData", faction] as const,
-  queryFn: () => getCastleData({ data: faction }),
-});
+type RawCastle = (typeof castles)[Faction];
+export type CastleBuilding = RawCastle extends Record<string, infer V>
+  ? V
+  : never;
+export type Castle = Record<string, CastleBuilding>;
+export type PreBuilds = (typeof initCastlePreBuilds)[Faction];
+export type SecondaryPreBuilds = (typeof secondaryCastlePreBuilds)[Faction];
 
-export const useFetchCastle = (faction: Faction) => {
-  return useSuspenseQuery(castleQueryOptions(faction));
+export type CastleConfig = {
+  castle: Castle;
+  preBuilds: PreBuilds;
+  secondaryPreBuilds: SecondaryPreBuilds;
 };
 
-type RawResponse = Awaited<ReturnType<typeof getCastleData>>;
-type RawCastle = RawResponse["castle"];
-export type CastleBuilding = RawCastle extends Record<string, infer V> ? V : never;
-export type Castle = Record<string, CastleBuilding>;
-export type PreBuilds = RawResponse["preBuilds"];
+// Castle data is static config bundled with the app — no server, no fetching.
+// Returns the castle layout plus its initial/secondary pre-builds for a faction.
+export const getCastleConfig = (faction: Faction): CastleConfig => ({
+  castle: castles[faction],
+  preBuilds: initCastlePreBuilds[faction],
+  secondaryPreBuilds: secondaryCastlePreBuilds[faction],
+});

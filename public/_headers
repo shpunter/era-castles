@@ -1,0 +1,11 @@
+# Cloudflare static-asset headers. This site is a Module Federation remote: the host
+# (eraplanner.com) loads remoteEntry.js and the JS/asset chunks from here
+# cross-origin, so every file must allow CORS.
+/*
+  Access-Control-Allow-Origin: *
+
+# remoteEntry.js is the federation manifest. It must never be cached stale or
+# the host can pin an old build that points at chunks that no longer exist.
+/remoteEntry.js
+  Cache-Control: no-cache
+  Access-Control-Allow-Origin: *

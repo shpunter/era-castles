@@ -1,0 +1,8 @@
+name = "era-castles"
+compatibility_date = "2026-06-13"
+
+# Assets-only Worker (no server code): Cloudflare serves the Vite build output as
+# static files. The build command (`pnpm build`) produces `dist`. CORS / cache
+# rules in `public/_headers` are applied automatically by Workers Static Assets.
+[assets]
+directory = "./dist"

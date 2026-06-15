@@ -4,19 +4,15 @@ import { useCastlesStore } from "../castleGrid/useCastles.store";
 import type { Faction } from "#/shared/castlesBus";
 import Popover from "#/features/components/popover/Popover";
 import Button from "#/features/components/tabs/button/Button";
-import { useQueryClient } from "@tanstack/react-query";
-import { castleQueryOptions } from "../useFetchCastle";
+import { getCastleConfig } from "../useFetchCastle";
 
 const castleIDs = ["hive", "dungeon", "grove", "necropolis", "schism", "temple"] as Faction[];
 
 const Add = () => {
   const addCastle = useCastlesStore((state) => state.addCastle);
-  const queryClient = useQueryClient();
 
-  const onAdd = async (faction: Faction) => {
-    const { castle, secondaryPreBuilds } = await queryClient.fetchQuery(
-      castleQueryOptions(faction),
-    );
+  const onAdd = (faction: Faction) => {
+    const { castle, secondaryPreBuilds } = getCastleConfig(faction);
 
     addCastle(crypto.randomUUID(), faction, castle, secondaryPreBuilds);
   };
