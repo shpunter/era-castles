@@ -1,11 +1,12 @@
 import { classnames } from "#/shared/classnames";
+import { asset } from "#/shared/asset";
 import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import css from "./castleMine.module.css";
 
 const RESOURCES = [
-  { res: "gold", icon: "/img/resource/gold.webp" },
-  { res: "law", icon: "/img/resource/law.png" },
-  { res: "astrology", icon: "/img/resource/astrology.png" },
+  { res: "gold", icon: asset("img/resource/gold.webp") },
+  { res: "law", icon: asset("img/resource/law.png") },
+  { res: "astrology", icon: asset("img/resource/astrology.png") },
 ] as const;
 
 const CastleMine = ({ value, buildingID }: CastleMineProps) => {

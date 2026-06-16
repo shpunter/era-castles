@@ -2,6 +2,7 @@ import {
   useCastlesStore,
   type BuildingID,
 } from "#/features/CastleBoard/useCastles.store";
+import { asset } from "#/shared/asset";
 import { trace } from "../../utils";
 import css from "./buildingActions.module.css";
 import CastleMine from "./castleMine/CastleMine";
@@ -34,7 +35,11 @@ const BuildingActions = ({ buildingID, isAvailable }: BuildingActionsProps) => {
       )}
       {isAvailable && (
         <div className={css.icon}>
-          <img className={css.hammer} src="/svg/hammer.svg" alt="built" />
+          <img
+            className={css.hammer}
+            src={asset("svg/hammer.svg")}
+            alt="built"
+          />
         </div>
       )}
 
