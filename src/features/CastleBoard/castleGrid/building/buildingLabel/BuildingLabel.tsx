@@ -1,4 +1,4 @@
-import type { CastleBuilding } from "#/features/CastleBaord/useFetchCastle";
+import type { CastleBuilding } from "#/features/CastleBoard/useFetchCastle";
 import { classnames } from "#/shared/classnames";
 import css from "./buildingLabel.module.css";
 

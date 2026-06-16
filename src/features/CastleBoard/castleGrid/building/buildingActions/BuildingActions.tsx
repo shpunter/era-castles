@@ -1,4 +1,4 @@
-import { useCastlesStore, type BuildingID } from "../../useCastles.store";
+import { useCastlesStore, type BuildingID } from "#/features/CastleBoard/useCastles.store";
 import { trace } from "../../utils";
 import css from "./buildingActions.module.css";
 import CastleMine from "./castleMine/CastleMine";

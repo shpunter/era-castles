@@ -1,4 +1,4 @@
-import { useCastlesStore } from "#/features/CastleBaord/castleGrid/useCastles.store";
+import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import { patchUp } from "#/shared/castlesBus";
 
 // Call once at app startup. Returns the unsubscribe handle (unused for the app

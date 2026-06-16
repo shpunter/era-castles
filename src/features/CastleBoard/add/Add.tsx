@@ -1,9 +1,9 @@
 
 import css from "./add.module.css";
-import { useCastlesStore } from "../castleGrid/useCastles.store";
+import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import type { Faction } from "#/shared/castlesBus";
-import Popover from "#/features/components/popover/Popover";
-import Button from "#/features/components/tabs/button/Button";
+import Popover from "#/components/popover/Popover";
+import Button from "#/components/tabs/button/Button";
 import { getCastleConfig } from "../useFetchCastle";
 
 const castleIDs = ["hive", "dungeon", "grove", "necropolis", "schism", "temple"] as Faction[];

@@ -1,5 +1,5 @@
-import Tabs from "#/features/components/tabs/Tabs";
-import { useCastlesStore } from "../castleGrid/useCastles.store";
+import Tabs from "#/components/tabs/Tabs";
+import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import css from "./tabs.module.css";
 
 const CastleTabs = () => {

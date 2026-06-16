@@ -1,5 +1,5 @@
 import { classnames } from "#/shared/classnames";
-import { useCastlesStore } from "../../../useCastles.store";
+import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import css from "./castleMine.module.css";
 
 const RESOURCES = [

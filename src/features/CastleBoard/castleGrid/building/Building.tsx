@@ -1,7 +1,7 @@
 import { classnames } from "#/shared/classnames";
 import type { Castle, CastleBuilding } from "../../useFetchCastle";
 import type { Faction } from "#/shared/castlesBus";
-import { useCastlesStore } from "../useCastles.store";
+import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import { useMarkedStore } from "../useMarked.store";
 import { trace } from "../utils";
 

@@ -1,4 +1,4 @@
-import CastleBoard from "@/features/CastleBaord/CastleBoard";
+import CastleBoard from "#/features/CastleBoard/CastleBoard";
 import "./styles.css";
 
 // Module Federation entry point. The host (eraplanner.com) imports `./App` and

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Castle, CastleBuilding, PreBuilds } from "../useFetchCastle";
+import type { Castle, CastleBuilding, PreBuilds } from "./useFetchCastle";
 import type { Faction } from "#/shared/castlesBus";
 
 export const useCastlesStore = create<Store & Action>((set) => {

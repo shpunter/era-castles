@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { useCastlesStore, type BuildingID } from "../useCastles.store";
-import type { CastleBuilding } from "../../useFetchCastle";
+import type { CastleBuilding } from "#/features/CastleBoard/useFetchCastle";
+import {
+  useCastlesStore,
+  type BuildingID,
+} from "#/features/CastleBoard/useCastles.store";
 
 // Derived read model for the active castle. The store keeps `built` day-indexed
 // (built[day] = id), which is right for writes but forces an O(n) scan per read.

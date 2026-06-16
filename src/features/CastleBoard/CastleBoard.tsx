@@ -3,7 +3,7 @@ import css from "./castleBoard.module.css";
 import { useGetDown } from "./useGetDown";
 import CastleGrid from "./castleGrid/CastleGrid";
 import { getCastleConfig } from "./useFetchCastle";
-import { useCastlesStore } from "./castleGrid/useCastles.store";
+import { useCastlesStore } from "./useCastles.store";
 import { initSendBack } from "#/shared/sendBack";
 import CastleTabs from "./tabs/Tabs";
 import Add from "./add/Add";
