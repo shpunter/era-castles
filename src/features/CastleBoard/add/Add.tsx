@@ -3,6 +3,7 @@ import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import type { Faction } from "#/shared/castlesBus";
 import Popover from "#/components/popover/Popover";
 import Button from "#/components/tabs/button/Button";
+import { asset } from "#/shared/asset";
 import { getCastleConfig } from "../useFetchCastle";
 
 const castleIDs = [
@@ -47,7 +48,7 @@ const Add = () => {
                   onClick={onClick}
                 >
                   <img
-                    src={`/img/factions/logo/${faction}.webp`}
+                    src={asset(`img/factions/logo/${faction}.webp`)}
                     alt={faction}
                     className={css.icon}
                   />

@@ -1,4 +1,5 @@
 import { classnames } from "#/shared/classnames";
+import { asset } from "#/shared/asset";
 import type { Castle, CastleBuilding } from "../../useFetchCastle";
 import type { Faction } from "#/shared/castlesBus";
 import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
@@ -75,7 +76,7 @@ const Building = ({ building, castle, faction, index }: BuildingProps) => {
     >
       <img
         key={building.id}
-        src={`/img/factions/buildings/${faction}/${building.id}.webp`}
+        src={asset(`img/factions/buildings/${faction}/${building.id}.webp`)}
         alt={building.name}
         className={css.image}
       />

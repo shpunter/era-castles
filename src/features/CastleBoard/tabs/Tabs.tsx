@@ -1,5 +1,6 @@
 import Tabs from "#/components/tabs/Tabs";
 import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
+import { asset } from "#/shared/asset";
 import css from "./tabs.module.css";
 
 const CastleTabs = () => {
@@ -23,7 +24,7 @@ const CastleTabs = () => {
           <Tabs.Tab key={uuid} value={uuid} indicator={hasChange}>
             <div className={css.item}>
               <img
-                src={`/img/factions/logo/${castle.faction}.webp`}
+                src={asset(`img/factions/logo/${castle.faction}.webp`)}
                 alt={castle.faction}
                 className={css.logo}
               />
