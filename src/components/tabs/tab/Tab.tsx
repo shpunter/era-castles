@@ -31,7 +31,9 @@ const Tab = <T extends string>({
       onClick={onClick}
     >
       <span className={css.label}>{children}</span>
-      {indicator && <span className={css.indicator} data-testid="tab-indicator" />}
+      {indicator && (
+        <span className={css.indicator} data-testid="tab-indicator" />
+      )}
     </button>
   );
 };

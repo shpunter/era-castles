@@ -40,6 +40,8 @@ const CastleMine = ({ value, buildingID }: CastleMineProps) => {
             className={className}
             onClick={onClick(res)}
             title={res}
+            data-testid={`mine-${buildingID}-${res}`}
+            aria-pressed={isActive}
           >
             <img className={css.icon} src={icon} alt={res} />
           </button>

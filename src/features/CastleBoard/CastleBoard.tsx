@@ -13,11 +13,21 @@ const CastleBoard = () => {
   const config = useMemo(() => getCastleConfig(faction), [faction]);
 
   const setInit = useCastlesStore((state) => state.setInit);
-  const active = useCastlesStore((state) => state.castles[state.currCastleUUID]);
+  const setDay = useCastlesStore((state) => state.setDay);
+  const active = useCastlesStore(
+    (state) => state.castles[state.currCastleUUID],
+  );
 
+  // Seed the primary castle from the host's faction (merges; doesn't reset).
   useEffect(() => {
-    setInit(faction, day, config.castle, config.preBuilds);
-  }, [setInit, day, faction, config]);
+    setInit(faction, config.castle, config.preBuilds);
+  }, [setInit, faction, config]);
+
+  // Sync the timeline day from the host — separate from seeding so a day change
+  // never rebuilds the castles registry.
+  useEffect(() => {
+    setDay(day);
+  }, [setDay, day]);
 
   useEffect(() => initSendBack(), []);
 

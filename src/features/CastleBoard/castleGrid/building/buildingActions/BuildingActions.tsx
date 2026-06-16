@@ -1,4 +1,7 @@
-import { useCastlesStore, type BuildingID } from "#/features/CastleBoard/useCastles.store";
+import {
+  useCastlesStore,
+  type BuildingID,
+} from "#/features/CastleBoard/useCastles.store";
 import { trace } from "../../utils";
 import css from "./buildingActions.module.css";
 import CastleMine from "./castleMine/CastleMine";
@@ -38,7 +41,7 @@ const BuildingActions = ({ buildingID, isAvailable }: BuildingActionsProps) => {
       {buildingID === "id11" && canBeRemoved && (
         <CastleMine value={500} buildingID={buildingID} />
       )}
-      {buildingID === "id21" && canBeRemoved &&(
+      {buildingID === "id21" && canBeRemoved && (
         <CastleMine value={1000} buildingID={buildingID} />
       )}
     </>

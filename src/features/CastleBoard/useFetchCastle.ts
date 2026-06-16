@@ -6,9 +6,8 @@ import {
 } from "#/shared/castles";
 
 type RawCastle = (typeof castles)[Faction];
-export type CastleBuilding = RawCastle extends Record<string, infer V>
-  ? V
-  : never;
+export type CastleBuilding =
+  RawCastle extends Record<string, infer V> ? V : never;
 export type Castle = Record<string, CastleBuilding>;
 export type PreBuilds = (typeof initCastlePreBuilds)[Faction];
 export type SecondaryPreBuilds = (typeof secondaryCastlePreBuilds)[Faction];

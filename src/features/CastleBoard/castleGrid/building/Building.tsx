@@ -64,6 +64,11 @@ const Building = ({ building, castle, faction, index }: BuildingProps) => {
     <div
       className={classNames}
       id={building.id}
+      data-testid={`building-${building.id}`}
+      data-built={isBuiltByCurDay || undefined}
+      data-built-today={isBuiltThisDay || undefined}
+      data-future={(isInTheHistory && !isBuiltByCurDay) || undefined}
+      data-available={isAvailable || undefined}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}

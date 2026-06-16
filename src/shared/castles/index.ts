@@ -5,7 +5,14 @@ import { dungeon } from "./dungeon";
 import { temple } from "./temple";
 import { schism } from "./schism";
 
-export const castles = { hive, necropolis, grove, dungeon, temple, schism } as const;
+export const castles = {
+  hive,
+  necropolis,
+  grove,
+  dungeon,
+  temple,
+  schism,
+} as const;
 
 export const initCastlePreBuilds = {
   hive: ["id10", "id01", "id05", "id06"],
