@@ -9,3 +9,11 @@
 /remoteEntry.js
   Cache-Control: no-cache
   Access-Control-Allow-Origin: *
+
+# Images have stable names but no content hash — cache for a week so
+# browsers don't re-fetch on every visit, but a redeploy still takes effect.
+/img/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/svg/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
