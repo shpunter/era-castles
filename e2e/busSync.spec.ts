@@ -26,21 +26,32 @@ test("castle mine can be selected only after its building is built", async ({
   await expect(goldMine).toHaveAttribute("aria-pressed", "true");
 });
 
-test("daily income (castle mine) is published to the rxjs bus", async ({
+test("daily income is published to the rxjs bus (produces + castle mine)", async ({
   page,
 }) => {
   await page.goto("/");
   await waitForApp(page);
   await goToDay(page, 1);
 
+  // id11 produces { gold: 250, law: 250, astrology: 250 } and carries a
+  // selectable mine worth 500.
   await page.getByTestId(`building-${MINE_BUILDING}`).click();
   await page.getByTestId(`mine-${MINE_BUILDING}-law`).click();
 
-  // sendBack mirrors mine income to bus.up.mine (summed by resource, bucketed
-  // at index 0) — positive, since it's income.
+  // Income (bus.up.mine, summed by resource, bucketed at index 0) is the sum of
+  // every producing building's `produces` plus the selected mine. The primary
+  // hive castle's pre-builds include id01 (produces 500 of each); built id11
+  // produces 250 of each; the law mine adds 500:
+  //   gold = 500 (id01) + 250 (id11)             = 750
+  //   law  = 500 (id01) + 250 (id11) + 500 (mine) = 1250
   await expect
     .poll(async () => (await getUp(page)).mine[0] ?? [])
-    .toContainEqual({ resID: "law", amount: 500 });
+    .toEqual(
+      expect.arrayContaining([
+        { resID: "gold", amount: 750 },
+        { resID: "law", amount: 1250 },
+      ]),
+    );
 });
 
 test("building cost is published to the rxjs bus as negative resources", async ({
@@ -62,4 +73,23 @@ test("building cost is published to the rxjs bus as negative resources", async (
         { resID: "wood", amount: -5 },
       ]),
     );
+});
+
+test("build history is published to the rxjs bus per day", async ({ page }) => {
+  await page.goto("/");
+  await waitForApp(page);
+
+  // Build different buildings on two days.
+  await goToDay(page, 1);
+  await page.getByTestId(`building-${COST_BUILDING}`).click(); // id20
+  await goToDay(page, 2);
+  await page.getByTestId(`building-${MINE_BUILDING}`).click(); // id11
+
+  // sendBack mirrors built building IDs to bus.up.history, indexed by day.
+  await expect.poll(async () => (await getUp(page)).history[1] ?? []).toEqual([
+    COST_BUILDING,
+  ]);
+  await expect.poll(async () => (await getUp(page)).history[2] ?? []).toEqual([
+    MINE_BUILDING,
+  ]);
 });

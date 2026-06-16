@@ -12,7 +12,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 
 const initialState: CastlesState = {
   down: { faction: "hive", historyIDX: 0 },
-  up: { resource: [], mine: [] },
+  up: { resource: [], mine: [], history: [] },
 };
 
 // Pin the streams on globalThis so host and remote share one instance even
@@ -80,5 +80,7 @@ export type CastlesState = {
     resource: { resID: string; amount: number }[][];
     /** Mine resources produced by castles per timeline day (index = day). */
     mine: { resID: string; amount: number }[][];
+    /** Building IDs built per timeline day, across all castles (index = day). */
+    history: string[][];
   };
 };

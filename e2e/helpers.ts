@@ -3,6 +3,7 @@ import { expect, type Page } from "@playwright/test";
 export type Up = {
   resource: { resID: string; amount: number }[][];
   mine: { resID: string; amount: number }[][];
+  history: string[][];
 };
 
 // Wait for the board to mount and the globalThis-pinned bus to exist.
