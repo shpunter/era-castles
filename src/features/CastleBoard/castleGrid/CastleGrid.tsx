@@ -27,7 +27,7 @@ const CastleGrid = ({ castle, faction }: CastleGridProps) => {
   if (!castle) return null;
 
   return (
-    <div className={css.castle}>
+    <div className={css.castle} data-testid="castle-grid" data-day={index.day}>
       {grid.map((building) =>
         "id" in building ? (
           <Building

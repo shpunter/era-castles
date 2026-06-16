@@ -1,5 +1,5 @@
-import type { Castle } from "../useFetchCastle";
-import type { BuildingID } from "./useCastles.store";
+import type { Castle } from "#/features/CastleBoard/useFetchCastle";
+import type { BuildingID } from "#/features/CastleBoard/useCastles.store";
 
 type Direction = "prev" | "next";
 

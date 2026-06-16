@@ -2,10 +2,14 @@ import { create } from "zustand";
 import type { Castle, CastleBuilding, PreBuilds } from "./useFetchCastle";
 import type { Faction } from "#/shared/castlesBus";
 
+// Stable key for the primary castle pushed down from the host. Seeding always
+// targets this UUID so it never clobbers a secondary castle added via the "+".
+export const PRIMARY_UUID = "init-uuid";
+
 export const useCastlesStore = create<Store & Action>((set) => {
   return {
     castles: {} as Store["castles"],
-    currCastleUUID: "init-uuid",
+    currCastleUUID: PRIMARY_UUID,
     faction: "hive",
     history: {} as Store["history"],
     day: 0,
@@ -114,21 +118,27 @@ export const useCastlesStore = create<Store & Action>((set) => {
       });
     },
 
-    setInit: (faction, day, castle, preBuilds) => {
+    setInit: (faction, castle, preBuilds) => {
       set((state) => {
         return {
           faction,
-          day,
+          // Merge — keep any secondary castles added via the "+". Only the
+          // primary slot is (re)seeded from the host's faction.
           castles: {
-            [state.currCastleUUID]: {
+            ...state.castles,
+            [PRIMARY_UUID]: {
               castle,
               preBuilds,
-              faction: faction,
+              faction,
               foundDay: 0,
             },
           },
         };
       });
+    },
+
+    setDay: (day) => {
+      set({ day });
     },
 
     setActiveTab: (castleUUID) => {
@@ -174,9 +184,10 @@ type Store = {
 
 type Action = {
   removeBuildings: (buildingIDs: BuildingID[]) => void;
-  setInit: (faction: Faction, day: number, castle: Castle, preBuilds: PreBuilds) => void;
+  setInit: (faction: Faction, castle: Castle, preBuilds: PreBuilds) => void;
+  setDay: (day: number) => void;
   setActiveTab: (castleUUID: string) => void;
-  
+
   addBuilding: (buildingID: BuildingID) => void;
   addCastle: (
     castleUUID: string,

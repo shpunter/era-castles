@@ -76,9 +76,9 @@ export type CastlesState = {
     historyIDX: number;
   };
   up: {
-    /** Resources produced by castles per timeline day (index = historyIDX). */
+    /** Resources produced by castles per timeline day (index = day). */
     resource: { resID: string; amount: number }[][];
-    /** Mine resources produced by castles per timeline day (index = historyIDX). */
+    /** Mine resources produced by castles per timeline day (index = day). */
     mine: { resID: string; amount: number }[][];
   };
 };

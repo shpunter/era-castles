@@ -5,7 +5,7 @@ import css from "./tabs.module.css";
 const CastleTabs = () => {
   const castles = useCastlesStore((state) => state.castles);
   const history = useCastlesStore((state) => state.history);
-  const historyIDX = useCastlesStore((state) => state.day);
+  const day = useCastlesStore((state) => state.day);
   const currCastleUUID = useCastlesStore((state) => state.currCastleUUID);
   const setActiveTab = useCastlesStore((state) => state.setActiveTab);
 
@@ -14,10 +14,10 @@ const CastleTabs = () => {
       {Object.entries(castles).map(([uuid, castle]) => {
         if (!castle?.faction) return null;
 
-        const isDisabled = history[uuid]?.disabled[historyIDX] ?? false;
+        const isDisabled = history[uuid]?.disabled[day] ?? false;
         if (isDisabled) return null;
 
-        const hasChange = !!history[uuid]?.built?.[historyIDX];
+        const hasChange = !!history[uuid]?.built?.[day];
 
         return (
           <Tabs.Tab key={uuid} value={uuid} indicator={hasChange}>

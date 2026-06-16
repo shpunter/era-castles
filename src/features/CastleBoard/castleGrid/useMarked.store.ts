@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { BuildingID } from "./useCastles.store";
+import type { BuildingID } from "#/features/CastleBoard/useCastles.store";
 
 export const useMarkedStore = create<Store & Action>((set) => {
   return {
