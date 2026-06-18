@@ -11,7 +11,9 @@ export const initSendBack = () => {
   // non-castles pages, so initSendBack would publish empty castles state.
   const seedFromFaction = (faction: Faction) => {
     const config = getCastleConfig(faction);
-    useCastlesStore.getState().setInit(faction, config.castle, config.preBuilds);
+    useCastlesStore
+      .getState()
+      .setInit(faction, config.castle, config.preBuilds);
   };
 
   seedFromFaction(state$.getValue().down.faction);
@@ -71,14 +73,19 @@ export const initSendBack = () => {
         const cost = building?.cost ?? {};
         if (!spentByDay[day]) spentByDay[day] = new Map();
         for (const [resID, amount] of Object.entries(cost)) {
-          spentByDay[day].set(resID, (spentByDay[day].get(resID) ?? 0) - amount);
+          spentByDay[day].set(
+            resID,
+            (spentByDay[day].get(resID) ?? 0) - amount,
+          );
         }
       });
     }
 
     const mine = Array.from({ length: mineByDay.length }, (_, day) => {
       const dayMap = mineByDay[day];
-      return dayMap ? Array.from(dayMap, ([resID, amount]) => ({ resID, amount })) : [];
+      return dayMap
+        ? Array.from(dayMap, ([resID, amount]) => ({ resID, amount }))
+        : [];
     });
 
     const resource = Array.from({ length: spentByDay.length }, (_, day) => {
