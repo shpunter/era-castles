@@ -8,7 +8,6 @@
 # the host can pin an old build that points at chunks that no longer exist.
 /remoteEntry.js
   Cache-Control: no-cache
-  Access-Control-Allow-Origin: *
 
 # Images have stable names but no content hash — cache for a week so
 # browsers don't re-fetch on every visit, but a redeploy still takes effect.
