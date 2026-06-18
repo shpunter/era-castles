@@ -28,28 +28,17 @@ if (!g.__castlesState$) {
   g.__castlesState$ = new BehaviorSubject<CastlesState>(initialState);
 }
 
-/** Event stream — use for transient signals (clicks, intents, notifications). */
 export const events$: Subject<CastlesEvent> = g.__castlesEvents$;
 
-/** State stream — use for current values that new subscribers should replay. */
 export const state$: BehaviorSubject<CastlesState> = g.__castlesState$;
 
-/** Publish an event onto the bus. */
 export const emit = (event: CastlesEvent): void => events$.next(event);
 
-/**
- * Push state DOWN: host → remote. Merges into the `down` slice, leaving
- * `up` and any untouched `down` fields intact.
- */
 export const patchDown = (patch: Partial<CastlesState["down"]>): void => {
   const prev = state$.getValue();
   state$.next({ ...prev, down: { ...prev.down, ...patch } });
 };
 
-/**
- * Push state UP: remote → host. Merges into the `up` slice, leaving
- * `down` and any untouched `up` fields intact.
- */
 export const patchUp = (patch: Partial<CastlesState["up"]>): void => {
   const prev = state$.getValue();
   state$.next({ ...prev, up: { ...prev.up, ...patch } });
@@ -63,24 +52,18 @@ export type Faction =
   | "grove"
   | "necropolis";
 
-/** Fire-and-forget events. Extend this union as the contract grows. */
 export type CastlesEvent =
   | { type: "castles:reset-all" }
   | { type: "castles:ready" };
 
-/** Shared, replayable state. Late subscribers immediately get the latest value. */
 export type CastlesState = {
   down: {
     faction: Faction;
-    /** Current timeline day index sent from host to remote. */
     historyIDX: number;
   };
   up: {
-    /** Building IDs built per timeline day — mirrors the remote's day-by-day history. */
     history: string[][];
-    /** Resources produced by castles per timeline day (index = historyIDX). */
     resource: { resID: string; amount: number }[][];
-    /** Mine resources produced by castles per timeline day (index = historyIDX). */
     mine: { resID: string; amount: number }[][];
   };
 };

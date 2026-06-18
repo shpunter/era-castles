@@ -1,6 +1,6 @@
 import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
 import { getCastleConfig } from "#/features/CastleBoard/useFetchCastle";
-import { patchUp, state$ } from "#/shared/castlesBus";
+import { events$, patchUp, state$ } from "#/shared/castlesBus";
 import type { Faction } from "#/shared/castlesBus";
 
 // Call once at app startup. Returns a cleanup handle (unused for the app
@@ -126,8 +126,18 @@ export const initSendBack = () => {
     }
   });
 
+  // Host can wipe all castle progress; clear the store and re-seed the primary
+  // castle from the current faction so the board isn't left empty.
+  const eventsUnsub = events$.subscribe((event) => {
+    if (event.type === "castles:reset-all") {
+      useCastlesStore.getState().reset();
+      seedFromFaction(state$.getValue().down.faction);
+    }
+  });
+
   return () => {
     storeUnsub();
     busUnsub.unsubscribe();
+    eventsUnsub.unsubscribe();
   };
 };

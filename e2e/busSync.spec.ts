@@ -102,3 +102,24 @@ test("build history is published to the rxjs bus per day", async ({ page }) => {
     MINE_BUILDING,
   ]);
 });
+
+test("castles:reset-all clears build progress", async ({ page }) => {
+  await page.goto("/");
+  await waitForApp(page);
+  await goToDay(page, 1);
+
+  const building = page.getByTestId(`building-${COST_BUILDING}`);
+  await building.click();
+  await expect(building).toHaveAttribute("data-built-today", "true");
+
+  // Host emits the reset event on the bus → store clears, board re-seeds empty.
+  await page.evaluate(() => {
+    (
+      window as unknown as { __castlesEvents$: { next: (e: unknown) => void } }
+    ).__castlesEvents$.next({ type: "castles:reset-all" });
+  });
+
+  // The building is no longer built, and the published history is empty again.
+  await expect(building).not.toHaveAttribute("data-built-today", "true");
+  await expect.poll(async () => (await getUp(page)).history).toEqual([]);
+});
