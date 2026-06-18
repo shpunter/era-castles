@@ -4,7 +4,6 @@ import { useGetDown } from "./useGetDown";
 import CastleGrid from "./castleGrid/CastleGrid";
 import { getCastleConfig } from "./useFetchCastle";
 import { useCastlesStore } from "./useCastles.store";
-import { initSendBack } from "#/shared/sendBack";
 import CastleTabs from "./tabs/Tabs";
 import Add from "./add/Add";
 
@@ -28,8 +27,6 @@ const CastleBoard = () => {
   useEffect(() => {
     setDay(day);
   }, [setDay, day]);
-
-  useEffect(() => initSendBack(), []);
 
   // Render the active castle from the store (switched by tabs / Add); fall back
   // to the faction's config before the store is seeded.

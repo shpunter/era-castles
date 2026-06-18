@@ -38,18 +38,27 @@ test("daily income is published to the rxjs bus (produces + castle mine)", async
   await page.getByTestId(`building-${MINE_BUILDING}`).click();
   await page.getByTestId(`mine-${MINE_BUILDING}-law`).click();
 
-  // Income (bus.up.mine, summed by resource, bucketed at index 0) is the sum of
-  // every producing building's `produces` plus the selected mine. The primary
-  // hive castle's pre-builds include id01 (produces 500 of each); built id11
-  // produces 250 of each; the law mine adds 500:
-  //   gold = 500 (id01) + 250 (id11)             = 750
-  //   law  = 500 (id01) + 250 (id11) + 500 (mine) = 1250
+  // bus.up.mine is per-day: income lands on the day each source starts accruing.
+  // mine[0] = the primary hive castle's pre-builds (accrue from foundDay 0);
+  // id01 produces 500 of each.
   await expect
     .poll(async () => (await getUp(page)).mine[0] ?? [])
     .toEqual(
       expect.arrayContaining([
-        { resID: "gold", amount: 750 },
-        { resID: "law", amount: 1250 },
+        { resID: "gold", amount: 500 },
+        { resID: "law", amount: 500 },
+        { resID: "astrology", amount: 500 },
+      ]),
+    );
+
+  // mine[1] = id11, built on day 1: produces 250 of each, plus the law mine
+  // (500) stacked on top → law = 750.
+  await expect
+    .poll(async () => (await getUp(page)).mine[1] ?? [])
+    .toEqual(
+      expect.arrayContaining([
+        { resID: "gold", amount: 250 },
+        { resID: "law", amount: 750 },
       ]),
     );
 });
