@@ -149,6 +149,17 @@ export const useCastlesStore = create<Store & Action>((set) => {
         };
       });
     },
+
+    // Clear all player progress (built history, mines, added castles). Keeps
+    // the host-driven `faction`/`day`; callers re-seed the primary castle.
+    reset: () => {
+      set({
+        castles: {},
+        history: {},
+        castleMines: {},
+        currCastleUUID: PRIMARY_UUID,
+      });
+    },
   };
 });
 
@@ -187,6 +198,7 @@ type Action = {
   setInit: (faction: Faction, castle: Castle, preBuilds: PreBuilds) => void;
   setDay: (day: number) => void;
   setActiveTab: (castleUUID: string) => void;
+  reset: () => void;
 
   addBuilding: (buildingID: BuildingID) => void;
   addCastle: (
