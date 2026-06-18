@@ -1,31 +1,45 @@
 import { useCastlesStore } from "#/features/CastleBoard/useCastles.store";
-import { patchUp } from "#/shared/castlesBus";
+import { getCastleConfig } from "#/features/CastleBoard/useFetchCastle";
+import { patchUp, state$ } from "#/shared/castlesBus";
+import type { Faction } from "#/shared/castlesBus";
 
-// Call once at app startup. Returns the unsubscribe handle (unused for the app
+// Call once at app startup. Returns a cleanup handle (unused for the app
 // lifetime, but handy for tests/HMR).
 export const initSendBack = () => {
-  const publish = (state = useCastlesStore.getState()) => {
-    // Daily income, summed across all castles by resource and bucketed at index
-    // 0 to match the bus `mine` type ({ resID; amount }[][]). Income is each
-    // built building's `produces` (summed as-is) plus the player's selected
-    // castle mines on top.
-    const income = new Map<string, number>();
+  // Seed the primary castle from the bus's current faction immediately. Without
+  // this, CastleBoard.setInit (which normally does the seeding) never runs on
+  // non-castles pages, so initSendBack would publish empty castles state.
+  const seedFromFaction = (faction: Faction) => {
+    const config = getCastleConfig(faction);
+    useCastlesStore.getState().setInit(faction, config.castle, config.preBuilds);
+  };
 
-    // Per timeline day, across all castles: the cost of whatever was built
-    // (negated — it's a spend) and the building IDs built that day.
+  seedFromFaction(state$.getValue().down.faction);
+
+  const publish = (state = useCastlesStore.getState()) => {
+    // Per timeline day: building costs (negated) and income by the day each
+    // source *starts* accruing. Pre-build income starts from foundDay; a built
+    // building's produces and castle-mine output start from the day it was
+    // built. buildTimeline adds mine[day] to incomePerDay on that day → pays
+    // out from the NEXT day, matching the original per-building timing.
     const spentByDay: Map<string, number>[] = [];
     const builtByDay: string[][] = [];
+    const mineByDay: Map<string, number>[] = [];
+
+    const addToMine = (day: number, resID: string, amount: number) => {
+      if (!mineByDay[day]) mineByDay[day] = new Map();
+      mineByDay[day].set(resID, (mineByDay[day].get(resID) ?? 0) + amount);
+    };
+
     for (const [uuid, castle] of Object.entries(state.castles)) {
       if (!castle) continue;
 
-      // Pre-builds are already built on the castle's found day and produce
-      // income too — they live in `preBuilds`, not in the day-by-day `built`
-      // history, so count their production here.
+      // Pre-builds are free and already live on the castle's found day.
       for (const buildingID of castle.preBuilds) {
         for (const [resID, amount] of Object.entries(
           castle.castle[buildingID]?.produces ?? {},
         )) {
-          income.set(resID, (income.get(resID) ?? 0) + amount);
+          addToMine(castle.foundDay, resID, amount);
         }
       }
 
@@ -36,52 +50,39 @@ export const initSendBack = () => {
 
         const building = castle.castle[buildingID];
 
-        let dayBuilt = builtByDay[day];
+        if (!builtByDay[day]) builtByDay[day] = [];
+        builtByDay[day].push(buildingID);
 
-        if (!dayBuilt) {
-          dayBuilt = [];
-          builtByDay[day] = dayBuilt;
-        }
-
-        dayBuilt.push(buildingID);
-
-        // Base daily income from the building's production.
+        // Building produces: income starts from the day it was built.
         for (const [resID, amount] of Object.entries(
           building?.produces ?? {},
         )) {
-          income.set(resID, (income.get(resID) ?? 0) + amount);
+          addToMine(day, resID, amount);
         }
 
+        // Castle mine (player-chosen output of a dwelling): same timing.
+        const castleMine =
+          state.castleMines?.[uuid]?.[buildingID as "id11" | "id21"];
+        if (castleMine) {
+          addToMine(day, castleMine.resource, castleMine.amount);
+        }
+
+        // Building cost is paid on the day it's built (negated).
         const cost = building?.cost ?? {};
-        let dayTotals = spentByDay[day];
-
-        if (!dayTotals) {
-          dayTotals = new Map<string, number>();
-          spentByDay[day] = dayTotals;
-        }
-
+        if (!spentByDay[day]) spentByDay[day] = new Map();
         for (const [resID, amount] of Object.entries(cost)) {
-          dayTotals.set(resID, (dayTotals.get(resID) ?? 0) - amount);
+          spentByDay[day].set(resID, (spentByDay[day].get(resID) ?? 0) - amount);
         }
       });
     }
 
-    // Castle mines (player-selected) stack on top of the base produces income.
-    for (const castleMines of Object.values(state.castleMines)) {
-      for (const entry of Object.values(castleMines)) {
-        if (!entry) continue;
-        income.set(
-          entry.resource,
-          (income.get(entry.resource) ?? 0) + entry.amount,
-        );
-      }
-    }
-
-    const mine = [Array.from(income, ([resID, amount]) => ({ resID, amount }))];
+    const mine = Array.from({ length: mineByDay.length }, (_, day) => {
+      const dayMap = mineByDay[day];
+      return dayMap ? Array.from(dayMap, ([resID, amount]) => ({ resID, amount })) : [];
+    });
 
     const resource = Array.from({ length: spentByDay.length }, (_, day) => {
       const dayTotals = spentByDay[day];
-
       return dayTotals
         ? Array.from(dayTotals, ([resID, amount]) => ({ resID, amount }))
         : [];
@@ -91,18 +92,35 @@ export const initSendBack = () => {
       { length: builtByDay.length },
       (_, day) => builtByDay[day] ?? [],
     );
-    console.log(mine, resource);
+
     return patchUp({ mine, resource, history });
   };
 
   publish();
 
-  return useCastlesStore.subscribe((state, prev) => {
+  const storeUnsub = useCastlesStore.subscribe((state, prev) => {
     if (
+      state.castles !== prev.castles ||
       state.castleMines !== prev.castleMines ||
       state.history !== prev.history
     ) {
       publish(state);
     }
   });
+
+  // Re-seed whenever the host switches faction (client-side nav while on a
+  // non-castles tab). Comparing by value avoids re-seeding on `up` updates.
+  let trackedFaction = state$.getValue().down.faction;
+  const busUnsub = state$.subscribe((busState) => {
+    const newFaction = busState.down.faction;
+    if (newFaction !== trackedFaction) {
+      trackedFaction = newFaction;
+      seedFromFaction(newFaction);
+    }
+  });
+
+  return () => {
+    storeUnsub();
+    busUnsub.unsubscribe();
+  };
 };
