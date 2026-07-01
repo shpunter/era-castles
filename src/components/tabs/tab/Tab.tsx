@@ -8,6 +8,7 @@ const Tab = <T extends string>({
   children,
   className,
   indicator = false,
+  disabled = false,
   ...props
 }: TabProps<T>) => {
   const { value: activeValue, onChange, size } = useTabsContext();
@@ -19,7 +20,9 @@ const Tab = <T extends string>({
     [css.active]: isActive,
   });
 
-  const onClick = () => onChange(value);
+  const onClick = () => {
+    if (!disabled) onChange(value);
+  };
 
   return (
     <button
@@ -27,6 +30,7 @@ const Tab = <T extends string>({
       type="button"
       role="tab"
       aria-selected={isActive}
+      disabled={disabled}
       className={classNames}
       onClick={onClick}
     >
@@ -45,4 +49,6 @@ type TabProps<T extends string> = ComponentPropsWithoutRef<"button"> & {
   children: ReactNode;
   /** shows a small yellow dot on the tab, e.g. to flag pending changes */
   indicator?: boolean;
+  /** renders the tab dimmed and non-selectable (see .tab:disabled) */
+  disabled?: boolean;
 };
