@@ -13,6 +13,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
     faction: "hive",
     history: {} as Store["history"],
     day: 0,
+    isDay0: false,
     castleMines: {},
 
     addBuilding: (buildingID) => {
@@ -82,11 +83,6 @@ export const useCastlesStore = create<Store & Action>((set) => {
 
     addCastle: (castleUUID, faction, castle, preBuilds) => {
       set((state) => {
-        // Idempotent registration. The castles tab remounts CastleGrid on every
-        // visit (it re-runs this with the route loader's stable castleUUID), so
-        // re-initializing here would wipe the built history. Only set up a UUID
-        // the first time it's seen; afterwards just re-activate it. New castles
-        // from the "+" button always carry a fresh UUID, so they still init.
         if (state.castles[castleUUID]) {
           return { ...state, currCastleUUID: castleUUID };
         }
@@ -98,6 +94,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
         return {
           ...state,
           currCastleUUID: castleUUID,
+          isDay0: false,
           castles: {
             ...state.castles,
             [castleUUID]: {
@@ -118,12 +115,53 @@ export const useCastlesStore = create<Store & Action>((set) => {
       });
     },
 
+    addPreBuilds: (buildingID) => {
+      set((state) => {
+        const { currCastleUUID } = state;
+        const castle = state.castles[currCastleUUID];
+        if (!castle || castle.preBuilds.includes(buildingID)) return state;
+
+        return {
+          ...state,
+          castles: {
+            ...state.castles,
+            [currCastleUUID]: {
+              ...castle,
+              preBuilds: [...castle.preBuilds, buildingID],
+            },
+          },
+        };
+      });
+    },
+
+    removePreBuilds: (buildingIDs) => {
+      set((state) => {
+        const { currCastleUUID } = state;
+        const castle = state.castles[currCastleUUID];
+        if (!castle) return state;
+
+        const remove = new Set(buildingIDs);
+        return {
+          ...state,
+          castles: {
+            ...state.castles,
+            [currCastleUUID]: {
+              ...castle,
+              preBuilds: castle.preBuilds.filter((id) => !remove.has(id)),
+            },
+          },
+        };
+      });
+    },
+
+    setIsDay0: (isDay0) => {
+      set({ isDay0 });
+    },
+
     setInit: (faction, castle, preBuilds) => {
       set((state) => {
         return {
           faction,
-          // Merge — keep any secondary castles added via the "+". Only the
-          // primary slot is (re)seeded from the host's faction.
           castles: {
             ...state.castles,
             [PRIMARY_UUID]: {
@@ -138,7 +176,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
     },
 
     setDay: (day) => {
-      set({ day });
+      set({ day, isDay0: false });
     },
 
     setActiveTab: (castleUUID) => {
@@ -146,18 +184,18 @@ export const useCastlesStore = create<Store & Action>((set) => {
         return {
           ...state,
           currCastleUUID: castleUUID,
+          isDay0: false,
         };
       });
     },
 
-    // Clear all player progress (built history, mines, added castles). Keeps
-    // the host-driven `faction`/`day`; callers re-seed the primary castle.
     reset: () => {
       set({
         castles: {},
         history: {},
         castleMines: {},
         currCastleUUID: PRIMARY_UUID,
+        isDay0: false,
       });
     },
   };
@@ -165,6 +203,7 @@ export const useCastlesStore = create<Store & Action>((set) => {
 
 type Store = {
   day: number;
+  isDay0: boolean;
   faction: Faction;
   castles: {
     [uuid: string]:
@@ -172,7 +211,6 @@ type Store = {
           castle: Castle;
           preBuilds: readonly BuildingID[];
           faction: Faction;
-          /** day the castle was added (first castle = 0) */
           foundDay: number;
         }
       | undefined;
@@ -197,8 +235,11 @@ type Action = {
   removeBuildings: (buildingIDs: BuildingID[]) => void;
   setInit: (faction: Faction, castle: Castle, preBuilds: PreBuilds) => void;
   setDay: (day: number) => void;
+  setIsDay0: (isDay0: boolean) => void;
   setActiveTab: (castleUUID: string) => void;
   reset: () => void;
+  addPreBuilds: (buildingID: BuildingID) => void;
+  removePreBuilds: (buildingIDs: BuildingID[]) => void;
 
   addBuilding: (buildingID: BuildingID) => void;
   addCastle: (

@@ -6,6 +6,7 @@ import { getCastleConfig } from "./useFetchCastle";
 import { useCastlesStore } from "./useCastles.store";
 import CastleTabs from "./tabs/Tabs";
 import Add from "./add/Add";
+import Day0 from "./day0/Day0";
 
 const CastleBoard = () => {
   const { faction, historyIDX: day } = useGetDown();
@@ -17,24 +18,20 @@ const CastleBoard = () => {
     (state) => state.castles[state.currCastleUUID],
   );
 
-  // Seed the primary castle from the host's faction (merges; doesn't reset).
   useEffect(() => {
     setInit(faction, config.castle, config.preBuilds);
   }, [setInit, faction, config]);
 
-  // Sync the timeline day from the host — separate from seeding so a day change
-  // never rebuilds the castles registry.
   useEffect(() => {
     setDay(day);
   }, [setDay, day]);
 
-  // Render the active castle from the store (switched by tabs / Add); fall back
-  // to the faction's config before the store is seeded.
   return (
     <section className={css.main}>
       <div className={css.tabsWrapper}>
         <CastleTabs />
         <Add />
+        <Day0 />
       </div>
       <CastleGrid
         castle={active?.castle ?? config.castle}

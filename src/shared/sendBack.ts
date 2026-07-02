@@ -36,12 +36,19 @@ export const initSendBack = () => {
     for (const [uuid, castle] of Object.entries(state.castles)) {
       if (!castle) continue;
 
-      // Pre-builds are free and already live on the castle's found day.
+      // Pre-builds are free and already live on the castle's found day — both
+      // their produces and any castle mine chosen on them accrue from foundDay.
       for (const buildingID of castle.preBuilds) {
         for (const [resID, amount] of Object.entries(
           castle.castle[buildingID]?.produces ?? {},
         )) {
           addToMine(castle.foundDay, resID, amount);
+        }
+
+        const castleMine =
+          state.castleMines?.[uuid]?.[buildingID as "id11" | "id21"];
+        if (castleMine) {
+          addToMine(castle.foundDay, castleMine.resource, castleMine.amount);
         }
       }
 
