@@ -16,12 +16,15 @@ const CastleTabs = () => {
         if (!castle?.faction) return null;
 
         const isDisabled = history[uuid]?.disabled[day] ?? false;
-        if (isDisabled) return null;
-
         const hasChange = !!history[uuid]?.built?.[day];
 
         return (
-          <Tabs.Tab key={uuid} value={uuid} indicator={hasChange}>
+          <Tabs.Tab
+            key={uuid}
+            value={uuid}
+            indicator={hasChange}
+            disabled={isDisabled}
+          >
             <div className={css.item}>
               <img
                 src={asset(`img/factions/logo/${castle.faction}.webp`)}

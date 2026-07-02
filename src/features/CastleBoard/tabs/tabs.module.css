@@ -6,6 +6,11 @@
   border-radius: 50%;
 }
 
+/* disabled castle (founded later than the current day): drain the color */
+button:disabled .logo {
+  filter: grayscale(1) drop-shadow(0 1px 2px var(--shadow-40));
+}
+
 .item {
   display: flex;
   align-items: center;

@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "vite dev --port 8089",
     "build": "vite build",
+    "build:local": "PUBLIC_URL=http://localhost:8089/ vite build",
     "preview": "vite preview",
+    "dev:remote": "pnpm run build:local --watch & pnpm preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "format": "biome format",

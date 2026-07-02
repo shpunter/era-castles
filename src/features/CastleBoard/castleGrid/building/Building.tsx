@@ -14,7 +14,9 @@ import { getBuildingStatus, type BuildingIndex } from "./useBuildingStatus";
 const Building = ({ building, castle, faction, index }: BuildingProps) => {
   const setMarked = useMarkedStore((state) => state.setMarked);
   const addBuilding = useCastlesStore((state) => state.addBuilding);
+  const addPreBuilds = useCastlesStore((state) => state.addPreBuilds);
   const removeBuildings = useCastlesStore((state) => state.removeBuildings);
+  const isDay0 = useCastlesStore((state) => state.isDay0);
 
   const { isBuiltByCurDay, isBuiltThisDay, isInTheHistory, isAvailable } =
     getBuildingStatus(building, index);
@@ -44,7 +46,7 @@ const Building = ({ building, castle, faction, index }: BuildingProps) => {
       removeBuildings(trace(castle, building.id, "next"));
     }
 
-    addBuilding(building.id);
+    isDay0 ? addPreBuilds(building.id) : addBuilding(building.id);
   };
 
   const classNames = classnames({
