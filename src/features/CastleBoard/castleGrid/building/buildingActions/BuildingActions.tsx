@@ -40,7 +40,12 @@ const BuildingActions = ({ buildingID, isAvailable }: BuildingActionsProps) => {
   return (
     <>
       {canBeRemoved && (
-        <button type="button" className={css.remove} onClick={onRemove}>
+        <button
+          type="button"
+          className={css.remove}
+          data-testid={`remove-${buildingID}`}
+          onClick={onRemove}
+        >
           X
         </button>
       )}

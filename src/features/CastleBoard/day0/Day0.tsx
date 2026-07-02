@@ -20,7 +20,7 @@ const Day0 = () => {
       data-testid="day0-toggle"
       onClick={onClick}
     >
-      {isDay0 ? "Disable" : "Enable"} Day0 Mode
+      {isDay0 ? "Disable" : "Enable"} Day0
     </Button>
   );
 };
