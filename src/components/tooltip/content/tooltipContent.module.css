@@ -2,6 +2,10 @@
   margin: 0;
   padding: 6px 10px;
 
+  /* hover-only tooltip: never intercept clicks meant for the elements beneath
+   * it (show/hide is driven entirely by the trigger's mouseenter/leave) */
+  pointer-events: none;
+
   background-color: var(--dark-blue-30);
   border: 1px solid var(--black-40);
   border-radius: 5px;
