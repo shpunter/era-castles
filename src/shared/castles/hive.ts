@@ -7,6 +7,8 @@ export const hive = {
     pos: [0, 0],
     cost: { gold: 0 },
     produces: {},
+    description:
+      "All friendly creatures gain +10 Attack in battle. +50% Lucky Strike Damage, including from hero spells. This city’s dwellings produce +100% units.",
   },
   id10: {
     id: "id10",
@@ -16,6 +18,7 @@ export const hive = {
     pos: [1, 0],
     cost: { gold: 500, ore: 5 },
     produces: {},
+    description: "Allows the hiring of new heroes.",
   },
   id20: {
     id: "id20",
@@ -25,6 +28,7 @@ export const hive = {
     pos: [2, 0],
     cost: { gold: 500, wood: 5 },
     produces: {},
+    description: "Allows resources to be traded.",
   },
   id01: {
     id: "id01",
@@ -34,6 +38,8 @@ export const hive = {
     pos: [0, 1],
     cost: { gold: 5000, wood: 10, ore: 15 },
     produces: { gold: 500, law: 500, astrology: 500 },
+    description:
+      "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
   },
   id11: {
     id: "id11",
@@ -43,6 +49,8 @@ export const hive = {
     pos: [1, 1],
     cost: { gold: 2500, wood: 5, ore: 5 },
     produces: { gold: 250, law: 250, astrology: 250 },
+    description:
+      "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
   },
   id21: {
     id: "id21",
@@ -52,6 +60,8 @@ export const hive = {
     pos: [2, 1],
     cost: { gold: 5000, wood: 10, ore: 10 },
     produces: { gold: 250, law: 250, astrology: 250 },
+    description:
+      "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
   },
   id31: {
     id: "id31",
@@ -61,6 +71,7 @@ export const hive = {
     pos: [3, 1],
     cost: { gold: 2000 },
     produces: { crystals: 1 },
+    description: "Produces 1 Crystal daily.",
   },
   id41: {
     id: "id41",
@@ -70,6 +81,7 @@ export const hive = {
     pos: [4, 1],
     cost: { gems: 3, crystals: 3, mercury: 3 },
     produces: { dust: 5 },
+    description: "Produces 5 Alchemical Dust daily.",
   },
   id02: {
     id: "id02",
@@ -79,6 +91,7 @@ export const hive = {
     pos: [0, 2],
     cost: { gold: 5000 },
     produces: {},
+    description: "Grants +2 Attack to any visiting hero.",
   },
   id22: {
     id: "id22",
@@ -88,6 +101,7 @@ export const hive = {
     pos: [2, 2],
     cost: { gold: 2500, wood: 5, ore: 5 },
     produces: { gold: 1000 },
+    description: "Produces 1000 Gold daily.",
   },
   id32: {
     id: "id32",
@@ -95,8 +109,9 @@ export const hive = {
     prev: ["id22", "id23"],
     next: null,
     pos: [3, 2],
-    cost: { gold: 2500, wood: 5, ore: 5 },
+    cost: { gold: 5000, gems: 5, crystals: 5, mercury: 5 },
     produces: { gold: 2000 },
+    description: "Produces 2000 Gold daily.",
   },
   id23: {
     id: "id23",
@@ -106,6 +121,8 @@ export const hive = {
     pos: [2, 3],
     cost: { gold: 2500, ore: 5 },
     produces: {},
+    description:
+      "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
   },
   id33: {
     id: "id33",
@@ -115,6 +132,8 @@ export const hive = {
     pos: [3, 3],
     cost: { gold: 2500, ore: 10 },
     produces: {},
+    description:
+      "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
   },
   id43: {
     id: "id43",
@@ -124,6 +143,8 @@ export const hive = {
     pos: [4, 3],
     cost: { gold: 5000, ore: 15 },
     produces: {},
+    description:
+      "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
   },
   id14: {
     id: "id14",
@@ -131,8 +152,9 @@ export const hive = {
     prev: ["id05"],
     next: ["id24"],
     pos: [1, 4],
-    cost: { gold: 3000, wood: 10 },
+    cost: { gold: 3250, wood: 10 },
     produces: {},
+    description: "Allows the recruitment of Hornets.",
   },
   id24: {
     id: "id24",
@@ -140,8 +162,9 @@ export const hive = {
     prev: ["id14"],
     next: null,
     pos: [2, 4],
-    cost: { gold: 750, wood: 10, crystals: 10, dust: 30 },
+    cost: { gold: 1000, wood: 10, crystals: 5, dust: 30 },
     produces: {},
+    description: "Allows the recruitment of Chanters and Stingers.",
   },
   id34: {
     id: "id34",
@@ -151,6 +174,8 @@ export const hive = {
     pos: [3, 4],
     cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
+    description:
+      "Allows to revert a hero to level one once. The hero receives a permanent bonus to their attributes that depends on their level at the moment of the ritual.",
   },
   id05: {
     id: "id05",
@@ -158,8 +183,9 @@ export const hive = {
     prev: null,
     next: ["id15"],
     pos: [0, 5],
-    cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
+    cost: { gold: 2500, wood: 5, ore: 5 },
     produces: {},
+    description: "Allows the recruitment of Locusts.",
   },
   id15: {
     id: "id15",
@@ -167,8 +193,10 @@ export const hive = {
     prev: ["id05"],
     next: null,
     pos: [1, 5],
-    cost: { gold: 1500, crystals: 5, dust: 20 },
+    cost: { gold: 3000, dust: 20 },
     produces: {},
+    description:
+      "Allows the recruitment of Overgrown Locusts and Harvester Locusts.",
   },
   id25: {
     id: "id25",
@@ -176,8 +204,9 @@ export const hive = {
     prev: ["id17"],
     next: ["id35", "id36"],
     pos: [2, 5],
-    cost: { gold: 6000, ore: 10, crystals: 5 },
+    cost: { gold: 6500, ore: 10, crystals: 5 },
     produces: {},
+    description: "Allows the recruitment of Waurmos.",
   },
   id35: {
     id: "id35",
@@ -185,8 +214,9 @@ export const hive = {
     prev: ["id25"],
     next: ["id45"],
     pos: [3, 5],
-    cost: { gold: 15000, crystals: 15 },
+    cost: { gold: 12500, wood: 5, ore: 5, crystals: 15 },
     produces: {},
+    description: "Allows the recruitment of Hive Queens.",
   },
   id45: {
     id: "id45",
@@ -194,8 +224,9 @@ export const hive = {
     prev: ["id35"],
     next: null,
     pos: [4, 5],
-    cost: { gold: 15000, crystals: 25, dust: 100 },
+    cost: { gold: 15000, wood: 5, ore: 5, crystals: 25, dust: 100 },
     produces: {},
+    description: "Allows the recruitment of Hive Mothers and Hive Huntresses.",
   },
   id06: {
     id: "id06",
@@ -205,6 +236,7 @@ export const hive = {
     pos: [0, 6],
     cost: {},
     produces: {},
+    description: "Allows the recruitment of Parasites.",
   },
   id16: {
     id: "id16",
@@ -212,8 +244,10 @@ export const hive = {
     prev: ["id06"],
     next: null,
     pos: [1, 6],
-    cost: { gold: 500, crystals: 5, dust: 10 },
+    cost: { gold: 1750, dust: 10 },
     produces: {},
+    description:
+      "Allows the recruitment of Warden Parasites and Ravager Parasites.",
   },
   id26: {
     id: "id26",
@@ -221,8 +255,10 @@ export const hive = {
     prev: ["id17"],
     next: null,
     pos: [2, 6],
-    cost: { gold: 1500, ore: 10, crystals: 5, dust: 40 },
+    cost: { gold: 1250, ore: 10, crystals: 5, dust: 40 },
     produces: {},
+    description:
+      "Allows the recruitment of Volcanic Scorpions and Spelaean Scorpions.",
   },
   id36: {
     id: "id36",
@@ -230,8 +266,9 @@ export const hive = {
     prev: ["id25"],
     next: null,
     pos: [3, 6],
-    cost: { gold: 4000, ore: 5, crystals: 15, dust: 75 },
+    cost: { gold: 4500, ore: 5, crystals: 15, dust: 75 },
     produces: {},
+    description: "Allows the recruitment of Devourers and Pyroboroses.",
   },
   id17: {
     id: "id17",
@@ -239,8 +276,9 @@ export const hive = {
     prev: ["id06"],
     next: ["id27", "id26", "id25"],
     pos: [1, 7],
-    cost: { gold: 3750, ore: 10 },
+    cost: { gold: 3500, ore: 10 },
     produces: {},
+    description: "Allows the recruitment of Scorpions.",
   },
   id27: {
     id: "id27",
@@ -250,6 +288,7 @@ export const hive = {
     pos: [2, 7],
     cost: { gold: 5500, wood: 10, crystals: 5 },
     produces: {},
+    description: "Allows the recruitment of Reavers.",
   },
   id37: {
     id: "id37",
@@ -259,6 +298,8 @@ export const hive = {
     pos: [3, 7],
     cost: { gold: 4000, wood: 5, crystals: 10, dust: 50 },
     produces: {},
+    description:
+      "Allows the recruitment of Menacing Reavers and Maniacal Reavers.",
   },
   id08: {
     id: "id08",
@@ -268,6 +309,8 @@ export const hive = {
     pos: [0, 8],
     cost: { gold: 2500, wood: 5 },
     produces: {},
+    description:
+      "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
   },
   id18: {
     id: "id18",
@@ -277,6 +320,8 @@ export const hive = {
     pos: [1, 8],
     cost: { gold: 2500, gems: 2, crystals: 2, mercury: 2 },
     produces: {},
+    description:
+      "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
   },
   id28: {
     id: "id28",
@@ -286,6 +331,8 @@ export const hive = {
     pos: [2, 8],
     cost: { gold: 2500, wood: 5, gems: 3, crystals: 3, mercury: 3 },
     produces: {},
+    description:
+      "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
   },
   id38: {
     id: "id38",
@@ -295,6 +342,8 @@ export const hive = {
     pos: [3, 8],
     cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
+    description:
+      "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
   },
   id48: {
     id: "id48",
@@ -304,5 +353,7 @@ export const hive = {
     pos: [4, 8],
     cost: { gold: 5000, wood: 10, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
+    description:
+      "Unlocks 3 random tier‑5 spells in the Magic Observatory and the ability to spend dust to upgrade tier-5 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–5 spells are added to their Spellbook.",
   },
 } as const;
