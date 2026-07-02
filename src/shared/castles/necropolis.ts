@@ -7,7 +7,8 @@ export const necropolis = {
     pos: [0, 0],
     cost: { gold: 0 },
     produces: {},
-    description: "All friendly creatures gain +10 Defense and take –50% Lucky Strike Damage in battle (including from spells). This city’s dwellings produce +100% units.",
+    description:
+      "All friendly creatures gain +10 Defense and take –50% Lucky Strike Damage in battle (including from spells). This city’s dwellings produce +100% units.",
   },
   id10: {
     id: "id10",
@@ -37,7 +38,8 @@ export const necropolis = {
     pos: [0, 1],
     cost: { gold: 0 },
     produces: { gold: 500, law: 500, astrology: 500 },
-    description: "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
+    description:
+      "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
   },
   id11: {
     id: "id11",
@@ -47,7 +49,8 @@ export const necropolis = {
     pos: [1, 1],
     cost: { gold: 2500, wood: 5, ore: 5 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
+    description:
+      "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
   },
   id21: {
     id: "id21",
@@ -57,7 +60,8 @@ export const necropolis = {
     pos: [2, 1],
     cost: { gold: 5000, wood: 10, ore: 10 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
+    description:
+      "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
   },
   id31: {
     id: "id31",
@@ -107,7 +111,8 @@ export const necropolis = {
     pos: [2, 3],
     cost: { gold: 2500, ore: 5 },
     produces: {},
-    description: "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
+    description:
+      "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
   },
   id33: {
     id: "id33",
@@ -117,7 +122,8 @@ export const necropolis = {
     pos: [3, 3],
     cost: { gold: 2500, ore: 10 },
     produces: {},
-    description: "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
+    description:
+      "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
   },
   id43: {
     id: "id43",
@@ -127,7 +133,8 @@ export const necropolis = {
     pos: [4, 3],
     cost: { gold: 5000, ore: 15 },
     produces: {},
-    description: "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
+    description:
+      "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
   },
   id04: {
     id: "id04",
@@ -137,7 +144,8 @@ export const necropolis = {
     pos: [0, 4],
     cost: { gold: 1000, wood: 5, ore: 5 },
     produces: {},
-    description: "Allows sacrificing of any creatures to turn them into Undead units of the same tier.",
+    description:
+      "Allows sacrificing of any creatures to turn them into Undead units of the same tier.",
   },
   id14: {
     id: "id14",
@@ -187,7 +195,8 @@ export const necropolis = {
     pos: [1, 5],
     cost: { gold: 1000, dust: 10 },
     produces: {},
-    description: "Allows the recruitment of Skeleton Warriors and Skeleton Archers.",
+    description:
+      "Allows the recruitment of Skeleton Warriors and Skeleton Archers.",
   },
   id25: {
     id: "id25",
@@ -207,7 +216,8 @@ export const necropolis = {
     pos: [3, 5],
     cost: { gold: 2000, mercury: 10, dust: 50 },
     produces: {},
-    description: "Allows the recruitment of Pestilent Liches and Sanguine Liches.",
+    description:
+      "Allows the recruitment of Pestilent Liches and Sanguine Liches.",
   },
   id16: {
     id: "id16",
@@ -247,7 +257,8 @@ export const necropolis = {
     pos: [4, 6],
     cost: { gold: 17500, wood: 5, ore: 5, mercury: 25, dust: 100 },
     produces: {},
-    description: "Allows the recruitment of Vampire Lords and Vampire Scholars.",
+    description:
+      "Allows the recruitment of Vampire Lords and Vampire Scholars.",
   },
   id07: {
     id: "id07",
@@ -277,7 +288,8 @@ export const necropolis = {
     pos: [2, 7],
     cost: { gold: 3500, wood: 5, ore: 5, mercury: 5, dust: 40 },
     produces: {},
-    description: "Allows the recruitment of Merchants of Death and Kennelmasters.",
+    description:
+      "Allows the recruitment of Merchants of Death and Kennelmasters.",
   },
   id37: {
     id: "id37",
@@ -297,7 +309,8 @@ export const necropolis = {
     pos: [0, 8],
     cost: { gold: 2500, wood: 5 },
     produces: {},
-    description: "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
+    description:
+      "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
   },
   id18: {
     id: "id18",
@@ -307,7 +320,8 @@ export const necropolis = {
     pos: [1, 8],
     cost: { gold: 2500, gems: 2, crystals: 2, mercury: 2 },
     produces: {},
-    description: "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
+    description:
+      "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
   },
   id28: {
     id: "id28",
@@ -317,7 +331,8 @@ export const necropolis = {
     pos: [2, 8],
     cost: { gold: 2500, wood: 5, gems: 3, crystals: 3, mercury: 3 },
     produces: {},
-    description: "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
+    description:
+      "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
   },
   id38: {
     id: "id38",
@@ -327,7 +342,8 @@ export const necropolis = {
     pos: [3, 8],
     cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
+    description:
+      "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
   },
   id48: {
     id: "id48",
@@ -337,6 +353,7 @@ export const necropolis = {
     pos: [4, 8],
     cost: { gold: 5000, wood: 10, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Unlocks 3 random tier‑5 spells in the Magic Observatory and the ability to spend dust to upgrade tier-5 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–5 spells are added to their Spellbook.",
+    description:
+      "Unlocks 3 random tier‑5 spells in the Magic Observatory and the ability to spend dust to upgrade tier-5 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–5 spells are added to their Spellbook.",
   },
 } as const;

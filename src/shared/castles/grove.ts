@@ -7,7 +7,8 @@ export const grove = {
     pos: [0, 0],
     cost: { gold: 0 },
     produces: {},
-    description: "+1 to all creature growth in all your cities. This city’s dwellings produce +100% units.",
+    description:
+      "+1 to all creature growth in all your cities. This city’s dwellings produce +100% units.",
   },
   id10: {
     id: "id10",
@@ -47,7 +48,8 @@ export const grove = {
     pos: [0, 1],
     cost: { gold: 0 },
     produces: { gold: 500, law: 500, astrology: 500 },
-    description: "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
+    description:
+      "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
   },
   id11: {
     id: "id11",
@@ -57,7 +59,8 @@ export const grove = {
     pos: [1, 1],
     cost: { gold: 2500, wood: 5, ore: 5 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
+    description:
+      "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
   },
   id21: {
     id: "id21",
@@ -67,7 +70,8 @@ export const grove = {
     pos: [2, 1],
     cost: { gold: 5000, wood: 10, ore: 10 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
+    description:
+      "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
   },
   id31: {
     id: "id31",
@@ -127,7 +131,8 @@ export const grove = {
     pos: [4, 2],
     cost: { gold: 5000, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Allows a hero to travel to any city of their choice under your control.",
+    description:
+      "Allows a hero to travel to any city of their choice under your control.",
   },
   id23: {
     id: "id23",
@@ -137,7 +142,8 @@ export const grove = {
     pos: [2, 3],
     cost: { gold: 2500, ore: 5 },
     produces: {},
-    description: "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
+    description:
+      "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
   },
   id33: {
     id: "id33",
@@ -147,7 +153,8 @@ export const grove = {
     pos: [3, 3],
     cost: { gold: 2500, ore: 10 },
     produces: {},
-    description: "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
+    description:
+      "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
   },
   id43: {
     id: "id43",
@@ -157,7 +164,8 @@ export const grove = {
     pos: [4, 3],
     cost: { gold: 5000, ore: 15 },
     produces: {},
-    description: "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
+    description:
+      "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
   },
   id14: {
     id: "id14",
@@ -237,7 +245,8 @@ export const grove = {
     pos: [1, 6],
     cost: { gold: 1000, wood: 5, ore: 5, crystals: 3, dust: 30 },
     produces: {},
-    description: "Allows the recruitment of Fungal Iriyads and Crystal Iriyads.",
+    description:
+      "Allows the recruitment of Fungal Iriyads and Crystal Iriyads.",
   },
   id26: {
     id: "id26",
@@ -297,7 +306,8 @@ export const grove = {
     pos: [4, 7],
     cost: { gold: 20000, wood: 5, ore: 5, crystals: 20, dust: 100 },
     produces: {},
-    description: "Allows the recruitment of Flaming Phoenixes and Energy Phoenixes.",
+    description:
+      "Allows the recruitment of Flaming Phoenixes and Energy Phoenixes.",
   },
   id08: {
     id: "id08",
@@ -307,7 +317,8 @@ export const grove = {
     pos: [0, 8],
     cost: { gold: 2500, wood: 5 },
     produces: {},
-    description: "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
+    description:
+      "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
   },
   id18: {
     id: "id18",
@@ -317,7 +328,8 @@ export const grove = {
     pos: [1, 8],
     cost: { gold: 2500, gems: 2, crystals: 2, mercury: 2 },
     produces: {},
-    description: "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
+    description:
+      "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
   },
   id28: {
     id: "id28",
@@ -327,7 +339,8 @@ export const grove = {
     pos: [2, 8],
     cost: { gold: 2500, wood: 5, gems: 3, crystals: 3, mercury: 3 },
     produces: {},
-    description: "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
+    description:
+      "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
   },
   id38: {
     id: "id38",
@@ -337,7 +350,8 @@ export const grove = {
     pos: [3, 8],
     cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
+    description:
+      "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
   },
   id48: {
     id: "id48",
@@ -347,6 +361,7 @@ export const grove = {
     pos: [4, 8],
     cost: { gold: 5000, wood: 10, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Unlocks 3 random tier‑5 spells in the Magic Observatory and the ability to spend dust to upgrade tier-5 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–5 spells are added to their Spellbook.",
+    description:
+      "Unlocks 3 random tier‑5 spells in the Magic Observatory and the ability to spend dust to upgrade tier-5 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–5 spells are added to their Spellbook.",
   },
 } as const;

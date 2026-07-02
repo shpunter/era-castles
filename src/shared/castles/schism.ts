@@ -7,7 +7,8 @@ export const schism = {
     pos: [0, 0],
     cost: { gold: 0 },
     produces: {},
-    description: "Building a Mage Guild in this city unlocks all spells of the corresponding tier. This city’s dwellings produce +100% units.",
+    description:
+      "Building a Mage Guild in this city unlocks all spells of the corresponding tier. This city’s dwellings produce +100% units.",
   },
   id10: {
     id: "id10",
@@ -47,7 +48,8 @@ export const schism = {
     pos: [0, 1],
     cost: { gold: 0 },
     produces: { gold: 500, law: 500, astrology: 500 },
-    description: "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
+    description:
+      "Grants the kingdom 500 Gold, Law points, and Astrology points daily. +1 hero cap.",
   },
   id11: {
     id: "id11",
@@ -57,7 +59,8 @@ export const schism = {
     pos: [1, 1],
     cost: { gold: 2500, wood: 5, ore: 5 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
+    description:
+      "Grants the kingdom 750 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-1 economy upgrade.",
   },
   id21: {
     id: "id21",
@@ -67,7 +70,8 @@ export const schism = {
     pos: [2, 1],
     cost: { gold: 5000, wood: 10, ore: 10 },
     produces: { gold: 250, law: 250, astrology: 250 },
-    description: "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
+    description:
+      "Grants the kingdom 1000 Gold, Law points, and Astrology points daily. Allows the owner to pick one level-2 economy upgrade.",
   },
   id31: {
     id: "id31",
@@ -127,7 +131,8 @@ export const schism = {
     pos: [2, 3],
     cost: { gold: 2500, ore: 5 },
     produces: {},
-    description: "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
+    description:
+      "Provides walls during sieges. Allows the builder to pick one level-1 defensive upgrade.",
   },
   id33: {
     id: "id33",
@@ -137,7 +142,8 @@ export const schism = {
     pos: [3, 3],
     cost: { gold: 2500, ore: 10 },
     produces: {},
-    description: "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
+    description:
+      "Adds two towers to the battlements that shoot at attackers during sieges. Allows the builder to pick one level-2 defensive upgrade. City dwellings produce +50% units.",
   },
   id43: {
     id: "id43",
@@ -147,7 +153,8 @@ export const schism = {
     pos: [4, 3],
     cost: { gold: 5000, ore: 15 },
     produces: {},
-    description: "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
+    description:
+      "Adds one more grand tower to the battlements that shoots at attackers during sieges and spikes by the walls. Allows the builder to pick one level-3 defensive upgrade. City dwellings produce +100% units.",
   },
   id04: {
     id: "id04",
@@ -187,7 +194,8 @@ export const schism = {
     pos: [3, 4],
     cost: { gold: 1500, wood: 15, ore: 15, dust: 50 },
     produces: {},
-    description: "Allows the recruitment of Mistresses of Chains and Bewitchers.",
+    description:
+      "Allows the recruitment of Mistresses of Chains and Bewitchers.",
   },
   id15: {
     id: "id15",
@@ -207,7 +215,8 @@ export const schism = {
     pos: [2, 5],
     cost: { gold: 750, wood: 10, ore: 10, dust: 30 },
     produces: {},
-    description: "Allows the recruitment of Aga’Shoth Tamers and Aga’Shoth Matha.",
+    description:
+      "Allows the recruitment of Aga’Shoth Tamers and Aga’Shoth Matha.",
   },
   id35: {
     id: "id35",
@@ -227,7 +236,8 @@ export const schism = {
     pos: [4, 5],
     cost: { gold: 3750, wood: 20, ore: 20, dust: 75 },
     produces: {},
-    description: "Allows the recruitment of Rift Arbitrators and Bloated Arbitrators.",
+    description:
+      "Allows the recruitment of Rift Arbitrators and Bloated Arbitrators.",
   },
   id06: {
     id: "id06",
@@ -247,7 +257,8 @@ export const schism = {
     pos: [1, 6],
     cost: { gold: 250, mercury: 5, dust: 10 },
     produces: {},
-    description: "Allows the recruitment of Stinging Ra’Shoth and Ferocious Ra’Shoth.",
+    description:
+      "Allows the recruitment of Stinging Ra’Shoth and Ferocious Ra’Shoth.",
   },
   id26: {
     id: "id26",
@@ -267,7 +278,8 @@ export const schism = {
     pos: [3, 6],
     cost: { gold: 17500, mercury: 25, dust: 100 },
     produces: {},
-    description: "Allows the recruitment of Abyssal Overseers and Abyssal Executors.",
+    description:
+      "Allows the recruitment of Abyssal Overseers and Abyssal Executors.",
   },
   id37: {
     id: "id37",
@@ -277,7 +289,8 @@ export const schism = {
     pos: [3, 7],
     cost: { gold: 5000, gems: 3, crystals: 3, mercury: 3 },
     produces: {},
-    description: "Once per week, allows the owner to recruit creatures from any one external dwelling under their control — even if there are no available units on the global map itself.",
+    description:
+      "Once per week, allows the owner to recruit creatures from any one external dwelling under their control — even if there are no available units on the global map itself.",
   },
   id17: {
     id: "id17",
@@ -297,7 +310,8 @@ export const schism = {
     pos: [2, 7],
     cost: { gold: 2000, mercury: 10, dust: 40 },
     produces: {},
-    description: "Allows the recruitment of Unspeakable Shoth and Unthinkable Shoth.",
+    description:
+      "Allows the recruitment of Unspeakable Shoth and Unthinkable Shoth.",
   },
   id08: {
     id: "id08",
@@ -307,7 +321,8 @@ export const schism = {
     pos: [0, 8],
     cost: { gold: 2500, wood: 5 },
     produces: {},
-    description: "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
+    description:
+      "Unlocks 7 random tier‑1 spells in the Magic Observatory and the ability to spend dust to upgrade tier-1 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1 spells are added to their Spellbook.",
   },
   id18: {
     id: "id18",
@@ -317,7 +332,8 @@ export const schism = {
     pos: [1, 8],
     cost: { gold: 2500, gems: 2, crystals: 2, mercury: 2 },
     produces: {},
-    description: "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
+    description:
+      "Unlocks 6 random tier‑2 spells in the Magic Observatory and the ability to spend dust to upgrade tier-2 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–2 spells are added to their Spellbook.",
   },
   id28: {
     id: "id28",
@@ -327,7 +343,8 @@ export const schism = {
     pos: [2, 8],
     cost: { gold: 2500, wood: 5, gems: 3, crystals: 3, mercury: 3 },
     produces: {},
-    description: "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
+    description:
+      "Unlocks 5 random tier‑3 spells in the Magic Observatory and the ability to spend dust to upgrade tier-3 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–3 spells are added to their Spellbook.",
   },
   id38: {
     id: "id38",
@@ -337,6 +354,7 @@ export const schism = {
     pos: [3, 8],
     cost: { gold: 2500, gems: 5, crystals: 5, mercury: 5 },
     produces: {},
-    description: "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
+    description:
+      "Unlocks 4 random tier‑4 spells in the Magic Observatory and the ability to spend dust to upgrade tier-4 spells or unlock additional ones. When heroes visit the city, all unlocked tier-1–4 spells are added to their Spellbook.",
   },
 } as const;
