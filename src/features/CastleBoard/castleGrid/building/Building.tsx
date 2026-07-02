@@ -10,6 +10,8 @@ import css from "./building.module.css";
 import BuildingActions from "./buildingActions/BuildingActions";
 import BuildingLabel from "./buildingLabel/BuildingLabel";
 import { getBuildingStatus, type BuildingIndex } from "./useBuildingStatus";
+import Tooltip from "#/components/tooltip/Tooltip";
+import BuildingDetails from "./buildingDetails/BuildingDetails";
 
 const Building = ({ building, castle, faction, index }: BuildingProps) => {
   const setMarked = useMarkedStore((state) => state.setMarked);
@@ -64,36 +66,43 @@ const Building = ({ building, castle, faction, index }: BuildingProps) => {
   });
 
   return (
-    <div
-      className={classNames}
-      id={building.id}
-      data-testid={`building-${building.id}`}
-      data-built={isBuiltByCurDay || undefined}
-      data-built-today={isBuiltThisDay || undefined}
-      data-future={(isInTheHistory && !isBuiltByCurDay) || undefined}
-      data-available={isAvailable || undefined}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-    >
-      <img
-        key={building.id}
-        src={asset(`img/factions/buildings/${faction}/${building.id}.webp`)}
-        alt={building.name}
-        className={css.image}
-      />
-      <BuildingActions
-        buildingID={building.id}
-        isAvailable={isAvailable && !isBuiltThisDay && !isBuiltByCurDay}
-      />
-      <BuildingLabel
-        name={building.name}
-        isMarked={isMarked}
-        isBuilt={isBuiltByCurDay || isBuiltThisDay}
-        isAvailable={isAvailable}
-        isBuiltThisDay={isBuiltThisDay}
-      />
-    </div>
+    <Tooltip>
+      <Tooltip.Trigger>
+        <div
+          className={classNames}
+          id={building.id}
+          data-testid={`building-${building.id}`}
+          data-built={isBuiltByCurDay || undefined}
+          data-built-today={isBuiltThisDay || undefined}
+          data-future={(isInTheHistory && !isBuiltByCurDay) || undefined}
+          data-available={isAvailable || undefined}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+        >
+          <img
+            key={building.id}
+            src={asset(`img/factions/buildings/${faction}/${building.id}.webp`)}
+            alt={building.name}
+            className={css.image}
+          />
+          <BuildingActions
+            buildingID={building.id}
+            isAvailable={isAvailable && !isBuiltThisDay && !isBuiltByCurDay}
+          />
+          <BuildingLabel
+            name={building.name}
+            isMarked={isMarked}
+            isBuilt={isBuiltByCurDay || isBuiltThisDay}
+            isAvailable={isAvailable}
+            isBuiltThisDay={isBuiltThisDay}
+          />
+        </div>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <BuildingDetails buildingID={building.id} />
+      </Tooltip.Content>
+    </Tooltip>
   );
 };
 

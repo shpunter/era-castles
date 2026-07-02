@@ -17,7 +17,7 @@ export const castles = {
 export const initCastlePreBuilds = {
   hive: ["id10", "id01", "id05", "id06"],
   necropolis: ["id10", "id01", "id05", "id07"],
-  grove: ["id10", "id01", "id05"],
+  grove: ["id10", "id01", "id05", "id15"],
   dungeon: ["id10", "id01", "id04", "id06"],
   temple: ["id10", "id01", "id15", "id06"],
   schism: ["id10", "id01", "id04", "id06"],

@@ -10,11 +10,8 @@ import {
 // (built[day] = id), which is right for writes but forces an O(n) scan per read.
 // We invert it once into a building-keyed map so every status lookup is O(1).
 export type BuildingIndex = {
-  /** building id -> day it was built (pre-builds map to -1, "always present") */
   builtDay: Map<BuildingID, number>;
-  /** currently selected day */
   day: number;
-  /** true if the selected day is free to build on (same for every building) */
   canBuildToday: boolean;
 };
 
@@ -49,8 +46,6 @@ export const useCastleIndex = (): BuildingIndex => {
   }, [built, preBuilds, disabled, day]);
 };
 
-// Pure O(1) per-building status derived from the shared index. No store
-// subscription, no array scans, no allocations.
 export const getBuildingStatus = (
   building: CastleBuilding,
   { builtDay, day, canBuildToday }: BuildingIndex,
@@ -72,12 +67,8 @@ export const getBuildingStatus = (
 };
 
 export type BuildingStatus = {
-  /** built on or before the selected day (incl. pre-builds) */
   isBuiltByCurDay: boolean;
-  /** built exactly on the selected day */
   isBuiltThisDay: boolean;
-  /** built on the selected day or any later day */
   isInTheHistory: boolean;
-  /** can be constructed on the selected day */
   isAvailable: boolean;
 };

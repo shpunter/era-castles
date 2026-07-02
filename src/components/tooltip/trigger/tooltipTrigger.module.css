@@ -1,0 +1,6 @@
+.trigger {
+  /* shrink-to-content without setting `width` (so a caller's own size wins);
+   * `anchor-name` is applied per-instance inline */
+  display: inline-block;
+  cursor: pointer;
+}
