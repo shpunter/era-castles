@@ -11,9 +11,10 @@
     "build:local": "PUBLIC_URL=http://localhost:8089/ vite build",
     "preview": "vite preview",
     "dev:remote": "pnpm run build:local --watch & pnpm preview",
+    "dev:local": "pnpm run build:local && pnpm preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "format": "biome format",
+    "format": "biome format --write",
     "lint": "biome lint",
     "check": "biome check",
     "deploy": "npm run build && wrangler deploy"

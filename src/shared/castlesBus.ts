@@ -12,7 +12,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 
 const initialState: CastlesState = {
   down: { faction: "hive", historyIDX: 0 },
-  up: { history: [], resource: [], mine: [] },
+  up: { history: [], resource: [], mine: [], hydrated: false },
 };
 
 // Pin the streams on globalThis so host and remote share one instance even
@@ -65,5 +65,8 @@ export type CastlesState = {
     history: string[][];
     resource: { resID: string; amount: number }[][];
     mine: { resID: string; amount: number }[][];
+    // False until the remote finishes reading its persisted state from IDB, so
+    // the host can show a loading state instead of an empty/stale board.
+    hydrated: boolean;
   };
 };
