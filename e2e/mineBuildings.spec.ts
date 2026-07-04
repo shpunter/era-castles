@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { getUp, goToDay, waitForApp } from "./helpers";
+import { getPersistedPrebuilds, getUp, goToDay, waitForApp } from "./helpers";
 
 // The Apiary's Heart dwelling line on the hive castle:
 //   id01 (pre-build)  produces { gold: 500, law: 500, astrology: 500 }
@@ -11,11 +11,26 @@ import { getUp, goToDay, waitForApp } from "./helpers";
 // The castle mine on id11/id21 can be poured into gold, law or astrology.
 const RES = ["gold", "law", "astrology"] as const;
 
-async function enableDay0(page: import("@playwright/test").Page) {
+type Page = import("@playwright/test").Page;
+
+async function enableDay0(page: Page) {
   const toggle = page.getByTestId("day0-toggle");
   await expect(toggle).toBeVisible();
   await toggle.click();
   await expect(toggle).toHaveAttribute("aria-pressed", "true");
+}
+
+async function disableDay0(page: Page) {
+  const toggle = page.getByTestId("day0-toggle");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+}
+
+// Add a new castle of the given faction via the "+" popover. The new castle
+// becomes the active tab.
+async function addCastle(page: Page, faction: string) {
+  await page.getByRole("button", { name: "+" }).click();
+  await page.getByTestId(`add-${faction}`).click();
 }
 
 test.describe("regular mode", () => {
@@ -241,5 +256,112 @@ test.describe("day-0 mode", () => {
           RES.map((resID) => ({ resID, amount: 500 })),
         ),
       );
+  });
+
+  test("user-added pre-builds survive a page reload (not overwritten by config)", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await waitForApp(page);
+    await enableDay0(page);
+
+    // id11 is NOT a config default pre-build (hive defaults: id10/id01/id05/id06),
+    // so adding it here is purely user state that must persist via IndexedDB.
+    const id11 = page.getByTestId("building-id11");
+    await id11.click();
+    await expect(id11).toHaveAttribute("data-built", "true");
+
+    // Wait for the async IndexedDB persist write to actually commit before
+    // reloading (the DOM attribute above only reflects in-memory state).
+    await expect
+      .poll(async () => await getPersistedPrebuilds(page))
+      .toContain("id11");
+
+    // Reload: the store rehydrates from IndexedDB, then setInit re-seeds on
+    // mount. The fix keeps the user's pre-builds instead of clobbering them with
+    // the config list.
+    await page.reload();
+    await waitForApp(page);
+
+    // The user-added pre-build is still there…
+    await expect(page.getByTestId("building-id11")).toHaveAttribute(
+      "data-built",
+      "true",
+    );
+    // …and its pre-build income is still published on foundDay (id11 produces
+    // 250 of each, on top of the id01 default pre-build's 500 of each).
+    await expect
+      .poll(async () => (await getUp(page)).mine[0] ?? [])
+      .toEqual(
+        expect.arrayContaining([
+          { resID: "gold", amount: 750 },
+          { resID: "law", amount: 750 },
+          { resID: "astrology", amount: 750 },
+        ]),
+      );
+  });
+
+  test("pre-builds across multiple castles & factions survive a reload", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await waitForApp(page);
+
+    // Add id11 + id21 as pre-builds to whichever castle is currently active.
+    const prebuildActiveCastle = async () => {
+      await enableDay0(page);
+      await page.getByTestId("building-id11").click();
+      await page.getByTestId("building-id21").click();
+      await expect(page.getByTestId("building-id21")).toHaveAttribute(
+        "data-built",
+        "true",
+      );
+      await disableDay0(page);
+    };
+
+    // 1) primary castle (hive, seeded by the host)
+    await prebuildActiveCastle();
+
+    // 2) a second castle of the SAME faction (hive) — becomes active on add
+    await addCastle(page, "hive");
+    await prebuildActiveCastle();
+
+    // 3) a third castle of a DIFFERENT faction (dungeon)
+    await addCastle(page, "dungeon");
+    await prebuildActiveCastle();
+
+    await expect(page.getByRole("tab")).toHaveCount(3);
+
+    // Snapshot what the remote publishes UP to the host (aggregated across all
+    // castles): mine = income, resource = spend, history = day-indexed builds.
+    // Pre-builds are free, so `resource`/`history` are empty by design and the
+    // patched-up value lives in `mine` — but we assert the whole slice so any
+    // spend/history would be covered too.
+    const pick = (up: Awaited<ReturnType<typeof getUp>>) => ({
+      mine: up.mine,
+      resource: up.resource,
+      history: up.history,
+    });
+    const before = pick(await getUp(page));
+    // sanity: we're actually verifying real published income, not empty == empty
+    expect(before.mine[0]?.length ?? 0).toBeGreaterThan(0);
+
+    await page.reload();
+    await waitForApp(page);
+
+    // All three castles kept their pre-builds (id11 + id21 built on each tab).
+    await expect(page.getByRole("tab")).toHaveCount(3);
+    for (let i = 0; i < 3; i++) {
+      await page.getByRole("tab").nth(i).click();
+      for (const id of ["id11", "id21"]) {
+        await expect(page.getByTestId(`building-${id}`)).toHaveAttribute(
+          "data-built",
+          "true",
+        );
+      }
+    }
+
+    // The published up-state is re-patched identically after the reload.
+    await expect.poll(async () => pick(await getUp(page))).toEqual(before);
   });
 });

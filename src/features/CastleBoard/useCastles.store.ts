@@ -1,4 +1,5 @@
-import { create } from "zustand";
+import { createIdbStore } from "#/shared/createIdbStore";
+import { patchUp } from "#/shared/castlesBus";
 import type { Castle, CastleBuilding, PreBuilds } from "./useFetchCastle";
 import type { Faction } from "#/shared/castlesBus";
 
@@ -6,8 +7,9 @@ import type { Faction } from "#/shared/castlesBus";
 // targets this UUID so it never clobbers a secondary castle added via the "+".
 export const PRIMARY_UUID = "init-uuid";
 
-export const useCastlesStore = create<Store & Action>((set) => {
-  return {
+export const useCastlesStore = createIdbStore<Store & Action>(
+  "castles",
+  (set) => ({
     castles: {} as Store["castles"],
     currCastleUUID: PRIMARY_UUID,
     faction: "hive",
@@ -160,15 +162,22 @@ export const useCastlesStore = create<Store & Action>((set) => {
 
     setInit: (faction, castle, preBuilds) => {
       set((state) => {
+        // Preserve the player's prebuilds across reload/remount: only seed the
+        // config defaults when the primary castle is new or the faction actually
+        // changed. Otherwise `setInit` (which runs on every mount) would clobber
+        // rehydrated user prebuilds with the static config list.
+        const existing = state.castles[PRIMARY_UUID];
+        const keep = existing?.faction === faction;
+
         return {
           faction,
           castles: {
             ...state.castles,
             [PRIMARY_UUID]: {
               castle,
-              preBuilds,
+              preBuilds: keep ? existing.preBuilds : preBuilds,
               faction,
-              foundDay: 0,
+              foundDay: keep ? existing.foundDay : 0,
             },
           },
         };
@@ -198,7 +207,25 @@ export const useCastlesStore = create<Store & Action>((set) => {
         isDay0: false,
       });
     },
-  };
+  }),
+  {
+    // Persist only user-authored data. `faction` and `day` are re-seeded from
+    // the host on every mount (initSendBack / CastleBoard), so — like law's
+    // lower/higher — they're intentionally left out to avoid restoring stale
+    // host state. Castle configs hold no functions, so they clone into IDB fine.
+    partialize: (state) => ({
+      castles: state.castles,
+      history: state.history,
+      castleMines: state.castleMines,
+      currCastleUUID: state.currCastleUUID,
+    }),
+  },
+);
+
+useCastlesStore.persist.onFinishHydration(() => {
+  // Signal the host that persisted state has loaded. The sendBack subscription
+  // republishes the actual castle/history/mine data on the same hydration.
+  patchUp({ hydrated: true });
 });
 
 type Store = {

@@ -1,10 +1,12 @@
 .content {
   margin: 0;
-  /* clear the UA popover inset:0, then anchor below the trigger, left-aligned */
+  /* clear the UA popover inset:0, then anchor below the trigger, left-aligned
+   * (grows rightward from the trigger's left edge — right-aligning instead
+   * pushes the menu off the left of the screen when the trigger sits near it) */
   inset: auto;
   position: absolute;
   top: anchor(bottom);
-  right: anchor(right);
+  left: anchor(left);
   margin-top: 6px;
 
   /* Deliberately no `display` here: an author `display` overrides the UA

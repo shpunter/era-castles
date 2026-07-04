@@ -36,6 +36,34 @@ export async function goToDay(page: Page, day: number) {
   );
 }
 
+// Read the primary castle's persisted pre-builds straight from IndexedDB (where
+// createIdbStore writes under the "eraplanner" DB → "state" store → "castles"
+// key). Lets a test wait for the async persist write to actually commit before
+// reloading, instead of racing it.
+export async function getPersistedPrebuilds(page: Page): Promise<string[]> {
+  return page.evaluate(async () => {
+    const db: IDBDatabase = await new Promise((resolve, reject) => {
+      const req = indexedDB.open("eraplanner", 1);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+    const value = await new Promise<{
+      state?: {
+        castles?: Record<string, { preBuilds?: string[] } | undefined>;
+      };
+    } | null>((resolve, reject) => {
+      const req = db
+        .transaction("state", "readonly")
+        .objectStore("state")
+        .get("castles");
+      req.onsuccess = () => resolve(req.result ?? null);
+      req.onerror = () => reject(req.error);
+    });
+    // "init-uuid" is the store's PRIMARY_UUID (the host-seeded primary castle).
+    return value?.state?.castles?.["init-uuid"]?.preBuilds ?? [];
+  });
+}
+
 // Read the `up` slice the remote publishes back to the host over the bus.
 export async function getUp(page: Page): Promise<Up> {
   return page.evaluate(() => {
