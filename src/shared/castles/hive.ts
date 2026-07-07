@@ -201,7 +201,7 @@ export const hive = {
   id25: {
     id: "id25",
     name: "Burning Soul Burrows",
-    prev: ["id17"],
+    prev: ["id14"],
     next: ["id35", "id36"],
     pos: [2, 5],
     cost: { gold: 6500, ore: 10, crystals: 5 },
