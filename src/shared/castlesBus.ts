@@ -11,7 +11,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 // regardless of framework, can import and use it.
 
 const initialState: CastlesState = {
-  down: { faction: "hive", historyIDX: 0 },
+  down: { faction: "dungeon", historyIDX: 0 },
   up: { history: [], resource: [], mine: [], hydrated: false },
 };
 
