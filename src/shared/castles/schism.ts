@@ -224,7 +224,7 @@ export const schism = {
     prev: ["id24"],
     next: ["id45"],
     pos: [3, 5],
-    cost: { gold: 6250, wood: 5, ore: 5,  mercury: 5 },
+    cost: { gold: 6250, wood: 5, ore: 5, mercury: 5 },
     produces: {},
     description: "Allows the recruitment of Arbitrators.",
   },
